@@ -1,0 +1,823 @@
+/* --- Global Styles --- */
+html, body {
+  margin: 0 auto;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  font-size: 18px;
+  line-height: 1.4;
+  font-family:
+    "source-serif-4-variable",
+    "Times New Roman"
+    serif,
+    "source-han-serif-tw-subset",
+    "PingFang TC",
+    "Songti TC";
+  font-weight: 400;
+  background: #fff;
+  color: #000;
+}
+/* Language-aware font stacks */
+:lang(zh),
+:lang(zh-Hant),
+:lang(zh-TW),
+:lang(zh-HK) {
+  font-family:
+    "source-han-serif-tw-subset",
+    "PingFang TC",
+    "Songti TC",
+    serif;
+  /* Optional: improve CJK punctuation spacing */
+  font-kerning: normal;
+  font-variant-east-asian: proportional-width;
+}
+/* Optional: keep English using a clean Latin stack explicitly when lang="en" is present */
+:lang(en),
+:lang(en-CA) {
+  font-family:
+    ui-serif,
+    "Georgia",
+    "Times New Roman",
+    "Source Serif 4",
+    serif;
+}
+body {
+  min-height: 100vh;
+}
+/* Headings match body size; only weight changes */
+h1, h2, h3, h4, h5, h6 {
+  font-size: inherit;
+  line-height: inherit;
+  font-weight: 600;      /* requested visual emphasis only */
+  margin: 0 0 0.5rem 0;  /* tame default margins */
+}
+/* Optional: headings in vertical-rl Chinese keep block flow tidy */
+.chinese h1, .chinese h2, .chinese h3, .chinese h4, .chinese h5, .chinese h6 {
+  writing-mode: inherit;
+  -webkit-writing-mode: inherit;
+  text-orientation: inherit;
+}
+.body {
+  --page-right-pad: 20vw;
+  --video-left: 20vw;
+  --video-right-min: 33vw;
+  --chinese-col: 12vw;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  transition: all 200ms linear;
+  cursor: pointer;
+  color: #222;
+  text-decoration: none;
+}
+
+/* --- Navigation Bar Styles --- */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 10vh;
+  max-height: 100px;
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 1000;
+  /* box-shadow: 0 2px 16px rgba(0,0,0,0.04); */
+  display: flex;
+  align-items: center;
+}
+.navbar-content {
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 100%;
+  padding: 0 2rem;
+  box-sizing: border-box;
+}
+.navbar-left {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  flex: 1 1 0;
+  justify-content: flex-start;
+  gap: 2rem;
+}
+.navbar-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 1 auto;
+  height: 100%;
+}
+.navbar-logo-link {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+.navbar-logo-link img.navbar-logo {
+  height: 60%;
+  max-height: 60px;
+  max-width: 160px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+.navbar-right {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  flex: 1 1 0;
+  justify-content: flex-end;
+  gap: 2rem;
+}
+.navbar-link {
+  color: #222;
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 400;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+.navbar-link:hover {
+  background: rgba(0,0,0,0.06);
+  font-weight: 600;
+}
+.mobile-navbar {
+  display: none;
+}
+/* --- Section & Row --- */
+.section {
+  min-height: 90vh;
+  padding: 10vh 10vw 0 10vw;
+  margin-top: 10vh;
+  direction: ltr;
+  position: relative;
+  display: block;
+}
+/* Desktop / default: Universities section height */
+.section.universities {
+  min-height: 110vh;
+}
+.section.last {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  height: 50vh;
+  min-height: auto;
+  padding-bottom: 10vh;
+}
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.section.last .row{
+  max-height: 25vh;
+}
+.english {
+  width: 80%;
+  text-align: left;
+  align-self: flex-start;
+  flex: 0 0 20%;
+}
+.english.last {
+  margin: 0 auto 0 0;
+}
+.chinese {
+  height: 80%;
+  text-align: left;
+  display: block;
+  direction: ltr;
+  color: #222;
+  line-height: 30px;
+  -webkit-writing-mode: vertical-rl;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  white-space: normal;
+  line-break: strict;
+  word-break: break-all;
+  width: var(--chinese-col);
+  flex: 0 0 var(--chinese-col);
+  padding-right: 0px;
+  padding-left: 0px;
+  align-self: flex-start;
+  margin-top: 10vh;
+}
+.chinese p {
+  display: inline-block;
+  vertical-align: top;
+  margin: 0 0 0 16px;
+}
+@supports (word-break: auto-phrase) {
+  .chinese,
+  .chinese p {
+    word-break: auto-phrase;
+  }
+}
+
+/* --- Video Section --- */
+.video-section.video-content {
+  position: relative;
+  width: 75vw;
+  max-width: 800px;
+  height: auto;
+  max-height: 50vh;
+  margin-top: auto;
+  margin-bottom: 0;
+  z-index: 1;
+  left: -10vw;
+  bottom: -10vh;
+  overflow: visible;
+  pointer-events: none;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  align-self: flex-start;
+}
+.cover-video {
+  object-fit: contain;
+  max-width: 100%;
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
+}
+.video-bg {
+  background: none;
+  background-image: none;
+  pointer-events: none;
+}
+.video-bg,
+.video-section.video-content,
+.portrait,
+.cover-video {
+  pointer-events: none;
+}
+#videos-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  pointer-events: none;
+  z-index: 1;
+}
+.portrait {
+  position: absolute;
+  width: 60vw;
+  height: 55vh;
+  margin-top: 10vh;
+  margin-left: -15vw;
+  pointer-events: none;
+}
+
+/* --- Contact Section --- */
+.contact-links {
+  position: relative;
+  left: 25%;
+  display: flex;
+  min-width: 150px;
+  padding-left: 100px;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  z-index: 999;
+}
+.contact-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+.qr {
+  position: relative;
+  bottom: 200px;
+  width: 150px;
+  height: 150px;
+  min-height: 150px;
+  min-width: 150px;
+  margin-left: 40%;
+  background-image: url('../images/QR__wechat.jpg');
+  background-position: 50% 50%;
+  background-size: contain;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.serif.social-link {
+  margin-top: 2px;
+  margin-bottom: 2px;
+  color: #222;
+  line-height: 30px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+/* --- Modal Styles --- */
+.wechat-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.5);
+  z-index: 99999;
+  opacity: 0;
+  pointer-events: none;
+}
+.wechat-modal.open {
+  display: block;
+  opacity: 1;
+  pointer-events: auto;
+}
+.wechat-modal-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 2px 24px rgba(0,0,0,0.2);
+  z-index: 100000;
+  width: auto;
+  min-width: 0;
+  max-width: 90vw;
+  max-height: 66vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: auto;
+  box-sizing: border-box;
+}
+.wechat-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  z-index: 100001;
+}
+.wechat-modal-content img {
+  display: block;
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  margin: 0 auto 16px auto;
+}
+.whatsapp-button-wrap {
+  width: 100%;
+  max-width: 200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+.whatsapp-button-wrap button {
+  width: 100%;
+  max-width: 200px;
+  display: block;
+  margin: 0 auto;
+}
+
+/* --- Universities Grid Styles --- */
+.universities-grid {
+  aspect-ratio: unset;
+  width: 66vw;
+  max-width: 800px;
+  height: 100vh;
+  max-height: 120vh;
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  overflow: hidden;
+}
+.universities-grid-inner {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: minmax(100px, 1fr);
+  gap: 2rem;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-items: center;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+.universities-grid-inner img {
+  height: 100px;
+  width: auto;
+  max-width: 180px;
+  object-fit: contain;
+  background: #fff;
+  border-radius: 6px;
+}
+
+/* --- Responsive Media Queries --- */
+/* Portrait - In General */
+/* --- Portrait (any device) --- */
+@media (orientation: portrait) {
+  .navbar-content {
+    padding: 0 5vw 0 5vw;
+  }
+  .section {
+    min-height: 60vh;
+    padding: 0 5vw 0 5vw;
+  }
+  .section.universities {
+    min-height: auto;
+  }
+  .section.last {
+    min-height: auto;
+    padding-bottom: 5vh;
+  }
+  .video-section.video-content {
+    left: -5vw;
+  }
+  .chinese {
+    max-height: 50vh;
+    min-height: 25vh;
+    height: auto;
+  }
+}
+/* Phone */
+/* --- Responsive: Phone Portrait --- */
+/* --- Phone Portrait (≤500px) --- */
+@media (max-width: 500px) and (orientation: portrait) {
+  /* Mobile logo: clickable, top-left */
+  .mobile-navbar .mobile-logo-link {
+    position: fixed;
+    top: 8px;
+    left: 12px;
+    width: 168px;
+    height: 40px;
+    background-image: url("../images/logo_simple.svg");
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-size: contain;
+    z-index: 3;
+    display: block;
+  }
+
+  /* Header: reserve space for logo when menu is closed */
+  .mobile-navbar .header {
+    padding-left: 184px;
+    box-sizing: border-box;
+  }
+  .mobile-navbar .header.menu-open {
+    padding-left: 0;
+    overflow-y: auto;
+  }
+
+  /* Hamburger alignment */
+  .icon-container {
+    float: right;
+    position: relative;
+    display: inline-block;
+    z-index: 2;
+    height: 55px;
+    width: 55px;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+    transition: all 0.3s cubic-bezier(0.4, 0.01, 0.165, 0.99);
+  }
+  .icon-container #menuicon {
+    width: 20px;
+    height: 10px;
+    position: relative;
+    display: block;
+    margin: -4px auto 0;
+    top: 50%;
+  }
+  #menuicon .bar {
+    width: 100%;
+    height: 1px;
+    display: block;
+    position: relative;
+    background: black;
+    transition: all 0.3s cubic-bezier(0.4, 0.01, 0.165, 0.99);
+  }
+  #menuicon .bar.bar1 {
+    -webkit-transform: translateY(0px) rotate(0deg);
+    transform: translateY(0px) rotate(0deg);
+  }
+  #menuicon .bar.bar2 {
+    -webkit-transform: translateY(6px) rotate(0deg);
+    transform: translateY(6px) rotate(0deg);
+  }
+  .menu-open .icon-container {
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+  }
+  .menu-open .icon-container #menuicon .bar {
+    transition: all 0.4s cubic-bezier(0.4, 0.01, 0.165, 0.99);
+    transition-delay: 0.1s;
+  }
+  .menu-open .icon-container #menuicon .bar.bar1 {
+    -webkit-transform: translateY(4px) rotate(45deg);
+    transform: translateY(4px) rotate(45deg);
+  }
+  .menu-open .icon-container #menuicon .bar.bar2 {
+    -webkit-transform: translateY(3px) rotate(-45deg);
+    transform: translateY(3px) rotate(-45deg);
+  }
+
+  /* Hide desktop navbar, show mobile */
+  .navbar {
+    display: none !important;
+  }
+  .mobile-navbar {
+    display: block !important;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1001;
+  }
+
+  /* Container and header styles */
+  .container {
+    background: white;
+    position: relative;
+    overflow: hidden;
+    width: 100vw;
+    height: 55px;
+    margin: 0 auto;
+    box-shadow: none;
+  }
+  .container .header {
+    background: white;
+    overflow: hidden;
+    height: 55px;
+    width: 100vw;
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transition: all 0.4s ease-out, background 1s ease-out;
+  }
+  .header.menu-open {
+    height: 100vh;
+    background: white;
+    transition: all 0.45s ease-out, background 0.8s ease-out;
+  }
+  .mobile-menu {
+    clear: both;
+  }
+
+  /* Menu styles */
+  .header ul.menu {
+    position: relative;
+    display: block;
+    padding: 0 24px;
+    list-style: none;
+    margin: 0;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .header ul.menu li.menu-item a {
+    display: block;
+    position: relative;
+    color: black;
+    text-decoration: none;
+    font-size: 18px;
+    line-height: 2.8;
+    width: 100%;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .header ul.menu li.menu-item {
+    border-bottom: 1px solid #333;
+    margin-top: 5px;
+    opacity: 0;
+    transition: opacity 0.6s cubic-bezier(0.4, 0.01, 0.165, 0.99), -webkit-transform 0.5s cubic-bezier(0.4, 0.01, 0.165, 0.99);
+    transition: transform 0.5s cubic-bezier(0.4, 0.01, 0.165, 0.99), opacity 0.6s cubic-bezier(0.4, 0.01, 0.165, 0.99);
+    transition: transform 0.5s cubic-bezier(0.4, 0.01, 0.165, 0.99), opacity 0.6s cubic-bezier(0.4, 0.01, 0.165, 0.99), -webkit-transform 0.5s cubic-bezier(0.4, 0.01, 0.165, 0.99);
+  }
+  .header ul.menu li.menu-item:nth-child(1) { transition-delay: 0.35s; }
+  .header ul.menu li.menu-item:nth-child(2) { transition-delay: 0.3s; }
+  .header ul.menu li.menu-item:nth-child(3) { transition-delay: 0.25s; }
+  .header ul.menu li.menu-item:nth-child(4) { transition-delay: 0.2s; }
+  .header ul.menu li.menu-item:nth-child(5) { transition-delay: 0.15s; }
+  .header ul.menu li.menu-item:nth-child(6) { transition-delay: 0.1s; }
+  .header ul.menu li.menu-item:nth-child(7) { transition-delay: 0.05s; }
+  .header.menu-open ul.menu li.menu-item { opacity: 1; }
+  .header.menu-open ul.menu li.menu-item:nth-child(1) { transition-delay: 0.05s; }
+  .header.menu-open ul.menu li.menu-item:nth-child(2) { transition-delay: 0.1s; }
+  .header.menu-open ul.menu li.menu-item:nth-child(3) { transition-delay: 0.15s; }
+  .header.menu-open ul.menu li.menu-item:nth-child(4) { transition-delay: 0.2s; }
+  .header.menu-open ul.menu li.menu-item:nth-child(5) { transition-delay: 0.25s; }
+  .header.menu-open ul.menu li.menu-item:nth-child(6) { transition-delay: 0.3s; }
+  .header.menu-open ul.menu li.menu-item:nth-child(7) { transition-delay: 0.35s; }
+
+  /* Section layout */
+  .section {
+    min-height: 120vh;
+    margin-top: 5vh;
+  }
+  .section.first {margin-top: 0;}
+  .section.universities {min-height: 140vh;}
+  .section.last .row {
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+  .english-video-col {
+    width: 50%;
+    height: 100%;
+  }
+  .english {width: 100%;}
+  .chinese {margin-top: 20vh;}
+  .video-section.video-content {
+    min-width: 100vw;
+    top: 40vh;
+  }
+  .universities-grid {
+    width: 70vw;
+    max-width: 600px;
+  }
+  .universities-grid-inner {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.25rem;
+    padding: 0.25rem;
+  }
+  .universities-grid-inner img {
+    height: 75px;
+    width: auto;
+    max-width: 75px;
+  }
+  .contact-links {
+    left: 0;
+  }
+}
+/* --- Tall Portrait (min-height: 900px) --- */
+@media (min-height: 900px) and (orientation: portrait) {
+  .video-section.video-content {
+    min-width: 95vw;
+    top: 45vh;
+  }
+}
+/* Tablet */
+/* --- Tablet Portrait (≥900px) --- */
+@media (min-width: 900px) and (orientation: portrait) {
+  /* Constrain the left content so the zh column (12vw) still fits */
+  .row { align-items: flex-start; }
+
+  .english-video-col {
+    width: calc(100% - var(--chinese-col)); /* leaves room for .chinese */
+  }
+
+  /* Downsize and re-position the video for tablet portrait */
+  .video-section.video-content {
+    position: relative;
+
+    /* Flush left edge with viewport (counteracts .section’s 5vw padding) */
+    left: -5vw;
+
+    /* Larger video on tablet portrait */
+    min-width: 0;
+    max-width: 800px;
+
+    /* Taller cap + more breathing room from the English blurb */
+    max-height: 55vh;
+    margin-top: 4vh;
+
+    bottom: 0;
+    top: auto;
+  }
+
+  .cover-video {
+    height: auto;
+    max-height: 55vh;
+    object-fit: contain;
+  }
+
+  /* Keep the zh column aligned without extra push */
+  .chinese {
+    margin-top: 10vh;
+    width: var(--chinese-col);
+    flex: 0 0 var(--chinese-col);
+  }
+}
+/* --- Small Tablet Portrait (700px–999px) --- */
+@media (min-width: 700px) and (max-width: 999px) and (orientation: portrait) {
+  .section.universities {
+    min-height: 50vh;
+    height: auto;
+  }
+
+  /* Ensure zh column fits and stays visible on the right */
+  .row { align-items: flex-start; }
+
+  .english-video-col {
+    width: calc(100% - var(--chinese-col));  /* leave room for .chinese */
+  }
+
+  .chinese {
+    width: var(--chinese-col);
+    flex: 0 0 var(--chinese-col);
+    margin-top: 8vh;                          /* a bit lower than the English blurb */
+  }
+
+  /* Lift the video up and keep it within view on small tablets */
+  .video-section.video-content {
+    position: relative;
+    left: -5vw;          /* align left edge with viewport (matches portrait) */
+    top: auto;           /* override Tall Portrait top:45vh */
+    bottom: 0;
+    margin-top: 3vh;     /* comfortable spacing from the English blurb */
+
+    min-width: 0;
+    width: 72vw;         /* a touch larger than before */
+    max-width: 640px;
+    max-height: 52vh;    /* slightly taller, still contained */
+  }
+
+  .cover-video {
+    height: auto;
+    max-height: 52vh;    /* match container cap */
+    object-fit: contain;
+  }
+
+  /* Keep the rest of this breakpoint’s rules (universities grid, etc.) as-is. */
+  .universities-grid {
+    width: 70vw;
+    max-width: 600px;
+  }
+  .universities-grid-inner {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+    padding: 0.5rem;
+  }
+  .universities-grid-inner img {
+    height: 100px;
+    width: auto;
+    max-width: 100px;
+  }
+}
+/* Phone Landscape */
+/* --- Phone Landscape (max-height: 600px) --- */
+@media (max-height: 600px) and (orientation: landscape) { 
+  body {
+    font-size: 16px;
+  }
+  .section {
+    min-height: 125vh;
+    height: auto;
+    padding: 5vh 2vw 0 2vw;
+    margin-top: 10vh;
+    direction: ltr;
+    position: relative;
+    display: block;
+  }
+  .section.universities {
+    min-height: 150vh;
+  }
+  .section.last {
+    min-height: 50vh;
+  }
+  .chinese {
+    max-height: 80vh;
+  }
+  .cover-video {
+    height: 80vh;
+  }
+  .video-section.video-content {
+    left: -2vw;
+  }
+  .universities-grid {
+    width: 70vw;
+    max-width: 600px;
+  }
+  .universities-grid-inner {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5rem;
+    padding: 0.5rem;
+  }
+  .universities-grid-inner img {
+    height: 100px;
+    width: auto;
+    max-width: 100px;
+  }
+}

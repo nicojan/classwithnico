@@ -1,0 +1,627 @@
+/* services.css - mobile-first, page-specific styles */
+
+body {
+  background: #fff;
+}
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  z-index: 10000;
+}
+.skip-link:focus {
+  left: 0;
+  top: 0;
+  width: auto;
+  height: auto;
+  padding: 1rem;
+  background: #222;
+  color: #fff;
+  outline: 2px solid #fff;
+}
+.intro-container {
+  max-width: 700px;
+  margin: 14vh auto 2.5rem auto;
+  padding: 0 1.5rem;
+  text-align: left;
+}
+.intro-title, .services-hero h1 {
+  font-size: 2.4rem;
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 0.7rem;
+  letter-spacing: 0;
+  text-transform: none;
+  font-family: "EB Garamond", serif;
+}
+.intro-blurb, .services-hero .services-value {
+  font-size: 1.15rem;
+  color: #222;
+  max-width: 38rem;
+  margin-bottom: 0.5rem;
+  font-family: "EB Garamond", serif;
+}
+.services-hero {
+  margin-top: 12vh;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+.services-hero h1 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+.services-hero .services-value {
+  font-size: 1.1rem;
+  color: #222;
+  margin-bottom: 0.5rem;
+}
+/* Remove jump bar styles */
+.services-jumpbar {
+  display: none !important;
+}
+/* --- Unified container for all sections --- */
+  .svc-container {
+    --svc-pad: 2.5rem;              /* shared gutter for this container */
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-inline: var(--svc-pad); /* left/right gutters */
+  }
+
+/* --- Subpage header styles --- */
+.subpage-header {
+  padding-top: 10vh;                   /* keep the vertical spacing */
+  padding-bottom: 0;
+  padding-inline: var(--svc-pad);      /* match container gutters */
+  margin-top: 10vh;
+  margin-bottom: 28px;
+  text-align: left;
+}
+.subpage-title {
+  font-size: 2.8rem;
+  font-weight: 700;
+  line-height: 1.18;
+  margin-bottom: 0.7rem;
+  letter-spacing: 0;
+  text-transform: none;
+  font-family: "EB Garamond", serif;
+}
+.subpage-blurb {
+  font-size: 1.15rem;
+  color: #222;
+  max-width: 60ch;
+  line-height: 1.6;
+  margin-bottom: 32px;
+  font-family: "EB Garamond", serif;
+}
+
+/* --- Services grid (desktop default) --- */
+.services-grid {
+  /* Centered 2-column track */
+  --svc-col-max: 560px;     /* column max width; adjust if needed */
+  --svc-gap: 1.25rem;       /* keep this in sync with other places */
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, var(--svc-col-max)));
+  grid-template-rows: auto auto auto;
+  gap: var(--svc-gap);
+  justify-content: center;  /* center the columns as a group */
+  justify-items: center;    /* center cards inside their cells */
+  margin-bottom: 32px;
+}
+.service-row {
+  display: contents;
+}
+#k12-academic-english {
+  grid-column: 1;
+  grid-row: 1;
+}
+#ell {
+  grid-column: 2;
+  grid-row: 1;
+}
+#test-taking {
+  grid-column: 1 / span 2;
+  grid-row: 2;
+}
+#university-applications {
+  grid-column: 1 / span 2;
+  grid-row: 3;
+}
+
+/* --- Service card styling --- */
+.service-card {
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.03);
+  padding: 28px;
+  max-width: var(--svc-col-max); 
+  width: auto;            /* allow intrinsic width up to max-width */
+  margin: 0;              /* keep local margins neutral */
+  scroll-margin-top: 12vh; 
+  justify-self: center;   /* centre within its grid column */
+}
+.service-card-wide {
+  width: 100%;
+  max-width: calc((var(--svc-col-max) * 2) + var(--svc-gap));
+  margin-left: auto;
+  margin-right: auto;
+  justify-self: center;
+  box-sizing: border-box;
+}
+.service-value {
+  font-size: 1.08rem;
+  margin-bottom: 0.7rem;
+  color: #222;
+  font-family: "EB Garamond", serif;
+}
+.service-bullets {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 0.5rem;
+}
+.service-bullets li {
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 0.5rem;
+}
+.service-bullets strong {
+  font-weight: 700;
+  color: #222;
+}
+
+/* --- CTA panel --- */
+.services-cta-panel {
+  max-width: calc((var(--svc-col-max) * 2) + var(--svc-gap));
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0;
+  margin-bottom: 32px;
+  box-shadow: none;
+  padding: 24px;
+  max-width: 1200px;
+  text-align: center;
+}
+.services-cta-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+#cta-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 0.7rem;
+  font-family: "EB Garamond", serif;
+}
+.cta-btn {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+  background: #222;
+  border-radius: 6px;
+  padding: 0.7rem 1.5rem;
+  margin-bottom: 0.5rem;
+  text-decoration: none;
+  border: none;
+  transition: background 0.2s;
+}
+.cta-btn:hover {
+  background: #444;
+}
+
+/* --- FAQ block --- */
+.services-faq {
+  max-width: calc((var(--svc-col-max) * 2) + var(--svc-gap));
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 32px;
+}
+.services-faq .faq-item {
+  margin-bottom: 1.2rem;
+  padding: 0;
+  border: 0;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.services-faq .faq-q {
+  font-weight: 700;
+  font-size: 1rem;
+  margin: 0 0 0.3rem 0;
+  line-height: 1.3;
+}
+
+/* --- Utility to preserve current visual style on semantic headings --- */
+.keep-visual {
+  font: inherit;
+  font-weight: 700;
+  margin: 0 0 0.7rem 0;
+  letter-spacing: inherit;
+  text-transform: inherit;
+}
+.subpage-header h1.keep-visual {
+  font: inherit;
+  font-weight: 700;
+  margin: 0 0 0.7rem 0;
+}
+.service-card h2.keep-visual {
+  font: inherit;
+  font-weight: 700;
+  margin: 0 0 0.7rem 0;
+}
+.services-faq .faq-item p {
+  padding-left: 1rem;
+}
+
+/* --- Focus states for links and buttons --- */
+.btn:focus, .cta-btn:focus {
+  outline: 2px solid #222;
+  background: #222;
+  color: #fff;
+}
+
+/* --- Clean-up: Remove any hiding/truncation rules --- */
+.service-card, .service-value, .service-bullets li {
+  max-height: none !important;
+  overflow: visible !important;
+  -webkit-line-clamp: unset !important;
+  line-clamp: unset !important;
+}
+.service-video {
+  width: 100%;
+  flex: 0 0 320px;
+}
+.service-video .cover-video {
+  width: 100%;
+  display: block;
+}
+.service-app-content {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+}
+.service-app-text {
+  flex: 1 1 0;
+}
+#university-applications .service-app-content {
+  display: flex;
+  gap: 2rem;
+  align-items: center; /* Vertically center content */
+}
+
+#university-applications .service-video {
+  flex: 0 0 50%;
+  max-width: 50%;
+  align-self: center;
+  display: flex;
+  justify-content: center;
+}
+
+#university-applications .service-app-text {
+  flex: 1 1 0;
+}
+
+/* --- Visually hidden utility class for accessibility --- */
+.visually-hidden {
+  position: absolute !important;
+  height: 1px; width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap;
+  border: 0;
+  padding: 0; margin: -1px;
+}
+
+/* ==== Services Page Responsive Rules — aligned with style.css breakpoints ==== */
+
+/* Base tweaks (apply everywhere, light-touch) */
+
+/* ---------------------------------------------------------------
+   1) Portrait — general
+---------------------------------------------------------------- */
+@media (orientation: portrait) {
+  /* Portrait — container side padding must not exceed FAQ padding */
+  .svc-container {
+    --svc-pad: 4vw;
+    padding-inline: var(--svc-pad);
+  }
+  /* Portrait — add vertical spacing between stacked cards */
+  .service-card,
+  .service-card-wide {
+    margin-bottom: 1rem;
+  }
+  /* Tighter header spacing on portrait (all sizes) */
+  .subpage-header {
+    --svc-pad: 4vw;               /* sync header/container gutters in portrait */
+    padding-top: 6vh;
+    padding-bottom: 0;
+    padding-inline: var(--svc-pad);
+    margin-top: 6vh;
+    margin-bottom: 20px;
+  }
+
+    /* Make services grid single column in portrait */
+    .services-grid {
+      /* Stop using CSS Grid on phones to avoid Safari bugs */
+      display: block;
+      margin-top: 0;
+    }
+
+    .service-row {
+      /* Safari iOS has issues with display: contents; treat it as a normal wrapper */
+      display: block;
+    }
+
+    /* Make every card stretch to container width on portrait */
+    .services-grid > .service-card,
+    .services-grid > .service-card-wide,
+    .service-row > .service-card {
+      width: 100%;
+      max-width: none;
+      justify-self: stretch;
+      box-sizing: border-box;
+    }
+
+    /* Keep flow in DOM order (safety override even though we dropped grid) */
+    #k12-academic-english,
+    #ell,
+    #test-taking,
+    #university-applications {
+      grid-column: auto !important;
+      grid-row: auto !important;
+    }
+
+  #test-taking.service-card-wide,
+  #university-applications.service-card-wide {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+    /* In portrait, stack video over text */
+    #university-applications .service-app-content {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    #university-applications .service-video {
+      order: -1;        /* move video before text */
+      flex: 0 0 auto;
+      max-width: 100%;
+      justify-content: center;
+    }
+    #university-applications .service-app-text {
+      flex: 1 1 auto;
+    }
+
+  .services-cta-panel {
+    margin-top: 0.5rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .services-faq {
+    padding-left: 5vw;
+    padding-right: 5vw;
+  }
+}
+
+/* ---------------------------------------------------------------
+   2) Phones Portrait — max-width: 500px
+---------------------------------------------------------------- */
+@media (max-width: 500px) and (orientation: portrait) {
+  /* Phones Portrait — consolidated and conflict-free */
+
+  /* Tighter header at top of page */
+  .subpage-header {
+    --svc-pad: 4vw;               /* phones use same 4vw gutters */
+    margin-top: 4vh;
+    padding-top: 4vh;
+    padding-bottom: 0;
+    padding-inline: var(--svc-pad);
+    margin-bottom: 8px;
+  }
+
+  /* Inter-card spacing for stacked layout */
+  .services-grid {
+    margin-top: 0;              /* no extra offset */
+    gap: 1.25rem;               /* vertical spacing between items */
+  }
+
+  /* Cards: full width + vertical spacing */
+  .service-card,
+  .service-card-wide {
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 1rem;        /* breathing room between cards */
+    padding-left: 0.5rem;       /* small side inset is fine */
+    padding-right: 0.5rem;
+  }
+
+  /* FAQ: add left/right gutters; prevent flush edges */
+  .services-faq {
+    padding-left: 4vw;
+    padding-right: 4vw;
+    overflow-x: hidden;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Typography tweaks that were already present */
+  #university-applications h2.keep-visual {
+    font-size: inherit;
+    line-height: 1.25;
+  }
+  #university-applications .service-app-text {
+    font-size: 1rem;
+  }
+  #university-applications .service-app-text .service-value {
+    font-size: 1.08rem;
+  }
+
+  .subpage-header .subpage-blurb {
+    font-size: 0.95rem;
+  }
+
+  .service-bullets li {
+    margin-bottom: 0.35rem;
+  }
+
+  .service-video .cover-video,
+  .service-card .cover-video {
+    max-height: 45vh; /* keep video reasonable on small screens */
+  }
+
+  .services-cta-panel {
+    padding: 16px;
+  }
+  .services-cta-container .cta-btn {
+    display: inline-block;
+    padding: 0.5rem 0.9rem;
+    font-size: 0.95rem;
+  }
+
+  .services-faq .faq-q {
+    font-size: 1rem;
+  }
+  .services-faq .faq-item p {
+    padding-left: 0.75rem;
+  }
+}
+
+/* ---------------------------------------------------------------
+   3) Tall Portrait — min-height: 900px
+---------------------------------------------------------------- */
+@media (min-height: 900px) and (orientation: portrait) {
+  .services-cta-panel {
+    padding-top: 28px;
+    padding-bottom: 28px;
+  }
+}
+
+/* ---------------------------------------------------------------
+   4) Large Tablets Portrait — min-width: 900px
+---------------------------------------------------------------- */
+@media (min-width: 900px) and (orientation: portrait) {
+  .services-grid {
+    gap: 2.25rem;
+  }
+
+  .service-app-content {
+    /* component uses flex in base; keep gap for spacing */
+    gap: 2rem;
+  }
+
+  .service-video .cover-video,
+  .service-card .cover-video {
+    max-height: 60vh;
+  }
+}
+
+/* ---------------------------------------------------------------
+   5) Mid Tablets Portrait — 700px–999px
+---------------------------------------------------------------- */
+@media (min-width: 700px) and (max-width: 999px) and (orientation: portrait) {
+  /* Add comfortable vertical spacing between stacked cards */
+  .services-grid {
+    row-gap: 1.25rem;   /* add if missing; keeps column at 1fr */
+    gap: 1.25rem;       /* explicit total gap for safety */
+  }
+
+  /* Fallback spacing between cards within this breakpoint */
+  .service-card,
+  .service-card-wide {
+    margin-bottom: 1rem;
+  }
+  /* Stack the grid into one column and let items flow in DOM order */
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+  #k12-academic-english,
+  #ell,
+  #test-taking,
+  #university-applications {
+    grid-column: auto;
+    grid-row: auto;
+  }
+  .service-row { display: contents; }
+
+  /* Ensure normal cards expand to full container width (match wide cards) */
+  .service-card {
+    max-width: none;
+    width: 100%;
+    justify-self: stretch;
+    box-sizing: border-box;   /* match wide cards’ sizing so widths align */
+  }
+
+  /* Stack text and video vertically, with video after the text */
+  #university-applications .service-app-content {
+    display: flex;          /* component uses flex */
+    flex-direction: column; /* vertical stack */
+    align-items: stretch;
+    gap: 1rem;
+  }
+  #university-applications .service-app-text {
+    order: 0;               /* text first */
+    flex: 1 1 auto;
+  }
+  #university-applications .service-video {
+    order: 1;               /* video second (below) */
+    flex: 0 0 auto;
+    max-width: 100%;
+    justify-content: center;
+  }
+
+  /* keep existing rule */
+  .services-faq .faq-item { max-width: 70ch; }
+}
+
+/* ---------------------------------------------------------------
+   6) Phones Landscape — max-height: 600px
+---------------------------------------------------------------- */
+@media (max-height: 600px) and (orientation: landscape) {
+  .subpage-header.svc-container {
+    --svc-pad: 2vw;
+    padding-inline: var(--svc-pad);
+  }
+
+  .services-grid {
+    gap: 1.25rem;
+  }
+
+  .service-row {
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .service-card,
+  .service-card-wide {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+
+  .service-app-content {
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 1rem;
+  }
+
+  .service-video .cover-video,
+  .service-card .cover-video {
+    max-height: 50vh; /* avoid overwhelming short viewports */
+  }
+
+  .services-cta-panel {
+    margin-top: 0.25rem;
+    margin-bottom: 0.75rem;
+    padding: 16px;
+  }
+
+  .services-faq .faq-item p {
+    padding-left: 0.75rem;
+  }
+}
+
+/* ==== End Services Page Responsive Rules ==== */

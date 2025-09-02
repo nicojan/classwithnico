@@ -1,0 +1,120 @@
+/* ---- Containers & Layout ---- */
+#main-content {
+  padding-bottom: 10vh;
+}
+/* Shared container width + side padding to match navbar/content rhythm */
+.svc-container {
+  width: 100%;
+  max-width: 1200px;      /* matches .navbar-content max-width */
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 2rem;     /* matches .navbar-content side padding */
+  padding-right: 2rem;    /* keeps left/right distance consistent with content below */
+  box-sizing: border-box;
+}
+
+/* Top header block for the page (title + blurb) */
+.subpage-header {
+  margin-top: calc(10vh + 1.5rem); /* clear fixed navbar (10vh) + breathing room */
+  margin-bottom: 2rem;
+}
+
+/* Keep headings visually strong without extra transforms; allows shared class on h1/h2 */
+.keep-visual {
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  margin: 0.25em 0;
+}
+
+/* Intro blurb under the H1 */
+.subpage-blurb {
+  max-width: 70ch;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: #222;
+  margin-top: 0.5rem;
+}
+
+/* Section spacing for subsequent content blocks */
+.svc-container + .svc-container {
+  margin-top: 2.5rem;
+}
+
+/* ---- Lists ---- */
+
+.service-bullets {
+  list-style: none;       /* remove default bullets for a cleaner look */
+  margin: 0.75rem 0 0 0;
+  padding: 0;
+}
+.service-bullets li {
+  position: relative;
+  padding-left: 1.25rem;
+  margin: 0.4rem 0;
+  line-height: 1.6;
+}
+.service-bullets li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  top: 0;
+  line-height: 1.6;
+  color: #333;
+}
+
+/* ---- Typography polish for this page ---- */
+#main-content h1, #main-content h2 {
+  /* --- Quieter headings to mimic homepage --- */
+}
+.h-quiet {
+  font-weight: 500;          /* lighter than bold */
+  letter-spacing: 0.1px;
+  text-transform: none;      /* ensure no accidental uppercase */
+  color: inherit;            /* use body text color */
+}
+
+/* H1: subtle, closer to body scale */
+#main-content h1,
+#main-content h2 {
+  font-size: 1rem;      /* same as body */
+  font-weight: 600;     /* bold for contrast */
+  line-height: 1.5;     /* match paragraph rhythm */
+  margin-top: 1rem;
+  margin-bottom: 0.25rem;
+}
+#main-content p {
+  margin: 0.5rem 0;
+}
+
+/* ---- Responsive adjustments ---- */
+
+/* Portrait (any) — align with global portrait paddings */
+@media (orientation: portrait) {
+  .subpage-header {
+    margin-top: calc(10vh + 1rem); /* slightly tighter on small vertical screens */
+  }
+  .subpage-blurb {
+    font-size: 1rem;
+  }
+}
+
+/* Phone Portrait (≤500px) — follow mobile navbar behavior in style.css */
+@media (max-width: 500px) and (orientation: portrait) {
+  .svc-container {
+    padding-left: 5vw;    /* match .navbar-content portrait padding */
+    padding-right: 5vw;
+  }
+  .subpage-header {
+    margin-top: 0;
+  }
+  .subpage-blurb {
+    max-width: 85ch;      /* allow a bit wider measure on small screens */
+  }
+}
+
+/* Phone Landscape — harmonize with global landscape scale */
+@media (max-height: 600px) and (orientation: landscape) {
+  .subpage-header {
+    margin-top: calc(10vh + 1rem);
+  }
+}
