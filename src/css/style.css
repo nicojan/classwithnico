@@ -43,19 +43,6 @@ html, body {
 body {
   min-height: 100vh;
 }
-/* Headings match body size; only weight changes */
-h1, h2, h3, h4, h5, h6 {
-  font-size: inherit;
-  line-height: inherit;
-  font-weight: 600;      /* requested visual emphasis only */
-  margin: 0 0 0.5rem 0;  /* tame default margins */
-}
-/* Optional: headings in vertical-rl Chinese keep block flow tidy */
-.chinese h1, .chinese h2, .chinese h3, .chinese h4, .chinese h5, .chinese h6 {
-  writing-mode: inherit;
-  -webkit-writing-mode: inherit;
-  text-orientation: inherit;
-}
 .body {
   --page-right-pad: 20vw;
   --video-left: 20vw;
@@ -632,7 +619,7 @@ a {
 
   /* Section layout */
   .section {
-    min-height: 120vh;
+    min-height: 130vh;
     margin-top: 5vh;
   }
   .section.first {margin-top: 0;}
