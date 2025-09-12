@@ -66,6 +66,14 @@ a {
   text-decoration: none;
 }
 
+h1, h2, h3, h4 {
+  font-size: 1rem;      /* same as body */
+  font-weight: 600;     /* bold for contrast */
+  line-height: 1.5;     /* match paragraph rhythm */
+  margin-top: 1rem;
+  margin-bottom: 0.25rem;
+}
+
 /* --- Navigation Bar Styles --- */
 .navbar {
   position: fixed;
