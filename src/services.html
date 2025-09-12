@@ -54,6 +54,9 @@
 </head>
 <body class="body">
   <a href="#main-content" class="skip-link">Skip to main content</a>
+  <div id="site-navbar"></div>
+  <script src="js/include.js" defer></script>
+  <script src="js/nav-toggle.js" defer></script>
   <!-- Header and nav copied from index.html, including mobile nav and JS -->
   <nav class="navbar">
     <div class="navbar-content">
@@ -217,16 +220,6 @@
       </div>
     </section>
   </main>
-  <script>
-    (function () {
-      const header = document.querySelector('.header');
-      const icon = document.querySelector('.icon-container');
-      if (header && icon) {
-        icon.onclick = function () {
-          header.classList.toggle('menu-open');
-        }
-      }
-    }());
-  </script>
+  
 </body>
 </html>
