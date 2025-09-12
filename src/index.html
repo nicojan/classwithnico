@@ -184,61 +184,21 @@
   ]
 }
 </script>
-
-<!-- Adobe Fonts -->
-<script>
-    (function(d) {
-      var config = {
-        kitId: 'hxp3tlv',
-        scriptTimeout: 3000,
-        async: true
-      },
-      h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
-    })(document);
-</script>
+  <!-- Adobe Fonts -->
+  <script>
+      (function(d) {
+        var config = {
+          kitId: 'hxp3tlv',
+          scriptTimeout: 3000,
+          async: true
+        },
+        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+      })(document);
+  </script>
 </head>
 <body class="body">
-  <nav class="navbar">
-    <div class="navbar-content">
-      <div class="navbar-left">
-        <a href="services.html" class="navbar-link">Services</a>
-        <a href="about.html" class="navbar-link">About</a>
-        <a href="index.html#contact" class="navbar-link">Contact</a>
-      </div>
-      <div class="navbar-center">
-        <a href="index.html" class="navbar-logo-link">
-          <img src="images/logo_simple.svg" alt="Logo" class="navbar-logo" />
-        </a>
-      </div>
-      <div class="navbar-right">
-        <a href="services-zh.html" class="navbar-link">服務</a>
-        <a href="about-zh.html" class="navbar-link">關於</a>
-        <a href="index.html#contact" class="navbar-link">聯絡</a>
-      </div>
-    </div>
-  </nav>
-  <!-- Mobile Navbar for Portrait Phones -->
-  <div class="container mobile-navbar">
-    <div class="header">
-      <a href="index.html" class="mobile-logo-link" aria-label="Home"></a>
-      <div class="icon-container">
-        <div id="menuicon">
-          <div class="bar bar1"></div>
-          <div class="bar bar2"></div>
-        </div>
-      </div>
-      <div class="mobile-menu">
-        <ul class="menu">
-          <li class="menu-item"><a href="services.html">Services</a></li>
-          <li class="menu-item"><a href="about.html">About</a></li>
-          <li class="menu-item"><a href="index.html#contact">Contact</a></li>
-          <li class="menu-item"><a href="services-zh.html">服務</a></li>
-          <li class="menu-item"><a href="about-zh.html">關於</a></li>
-          <li class="menu-item"><a href="index.html#contact">聯絡</a></li>
-        </ul>
-      </div>
-    </div>
-  </div>
+  <div id="site-navbar"></div>
+  <script src="js/include.js" defer></script>
   <section class="section first">
     <div class="row">
       <div class="english-video-col">
