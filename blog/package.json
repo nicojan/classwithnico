@@ -1,0 +1,15 @@
+{
+  "name": "eleventy-blog-starter",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "eleventy --serve --quiet",
+    "build": "eleventy"
+  },
+  "dependencies": {
+    "@11ty/eleventy": "^3.0.0",
+    "@11ty/eleventy-plugin-rss": "^1.3.0",
+    "@11ty/eleventy-plugin-sitemap": "^3.0.1",
+    "luxon": "^3.5.0"
+  }
+}

@@ -16,6 +16,11 @@ html, body {
   background: #fff;
   color: #000;
 }
+/* Offset blog content so it's not hidden under the fixed navbar */
+body.blog main,
+body.blog #main-content {
+  margin-top: 80px; /* adjust to your navbar height */
+}
 /* Language-aware font stacks */
 :lang(zh),
 :lang(zh-Hant),

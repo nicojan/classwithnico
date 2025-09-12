@@ -1,0 +1,9 @@
+{
+  "title": "Class with Nico \u2014 Blog",
+  "url": "https://blog.example.com",
+  "author": {
+    "name": "Nico Jan",
+    "email": "hello@example.com"
+  },
+  "description": "Insights on English learning, study skills, and admissions from Class with Nico."
+}

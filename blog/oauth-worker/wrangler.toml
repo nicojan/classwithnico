@@ -1,0 +1,6 @@
+name = "decap-oauth"
+main = "index.js"
+compatibility_date = "2024-09-01"
+
+[vars]
+# No public vars; use secrets for client id/secret
