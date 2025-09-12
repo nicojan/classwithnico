@@ -39,3 +39,15 @@
     </div>
   </div>
 </div>
+<script>
+    // Mobile navbar menu toggle for portrait phones
+    (function () {
+      const header = document.querySelector('.header');
+      const icon = document.querySelector('.icon-container');
+      if (header && icon) {
+        icon.onclick = function () {
+          header.classList.toggle('menu-open');
+        }
+      }
+    }());
+  </script>
