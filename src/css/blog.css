@@ -189,6 +189,7 @@ body.blog .pagination a:hover { background: rgba(0,0,0,.06); }
 /* ----- Footer links (back-to-blog and go-home) ----- */
 body.blog footer {
   padding: 1.5rem var(--gutter);
+  font-size: 0.8rem;
 }
 
 body.blog #back-to-blog,
