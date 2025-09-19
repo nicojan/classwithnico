@@ -198,11 +198,11 @@ body.blog #go-home {
 }
 
 body.blog #go-home {
-  margin-left: 1rem;   /* base indent */
+  margin-left: 2rem;   /* base indent */
 }
 
 body.blog #back-to-blog {
-  margin-left: 2rem;   /* further indent than go-home */
+  margin-left: 3.5rem; /* further indent to indicate hierarchy */
 }
 
 body.blog #back-to-blog a,
