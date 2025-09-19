@@ -201,7 +201,7 @@ body.blog #go-home {
 }
 
 body.blog #back-to-blog {
-  margin-left: 3.5rem; /* further indent to indicate hierarchy */
+  margin-left: 6rem; /* further indent to indicate hierarchy */
 }
 
 body.blog #back-to-blog a,
