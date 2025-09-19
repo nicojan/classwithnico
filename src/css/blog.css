@@ -24,23 +24,17 @@ body.blog #content {
 }
 
 /* ----- Typography (inherits site serif; adjust scales) ----- */
-body.blog h1 {
-  font-size: clamp(1.9rem, 3.2vw, 2.35rem);
-  line-height: 1.2;
-  margin: 0 0 .75rem;
-  font-weight: 700;
-}
-body.blog h2 {
-  font-size: clamp(1.5rem, 2.6vw, 1.9rem);
-  line-height: 1.25;
-  margin: 2rem 0 .5rem;
-  font-weight: 700;
-}
-body.blog h3 {
-  font-size: clamp(1.2rem, 2.2vw, 1.35rem);
-  line-height: 1.35;
-  margin: 1.25rem 0 .35rem;
+body.blog h1,
+body.blog h2,
+body.blog h3,
+body.blog h4,
+body.blog h5,
+body.blog h6 {
+  font-size: 1rem;
   font-weight: 600;
+  line-height: 1.5;
+  margin-top: 1rem;
+  margin-bottom: 0.25rem;
 }
 body.blog p { margin: 0 0 1rem; }
 body.blog .muted { color: var(--muted); }
@@ -77,6 +71,52 @@ body.blog .card {
   padding: 1rem 1.1rem;
   background: #fff;
   transition: transform .15s ease, box-shadow .15s ease;
+
+  /* NEW: cap card height & turn it into a flex column */
+  max-height: 600px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* prevents the card from growing past 600px */
+}
+/* Only figures inside cards — does NOT affect post content figures */
+body.blog .card > figure {
+  /* Let the figure absorb remaining room in the 600px card */
+  flex: 1 1 auto;
+  min-height: 0;      /* allows flex child to shrink if needed */
+  margin: 0;          /* cards typically want tight media blocks */
+  position: relative; /* for absolute image fill below */
+  display: block;
+  overflow: hidden;   /* hide any overflow from contained media */
+}
+
+/* Maintain a 16:9 box for the media */
+body.blog .card > figure::before {
+  content: "";
+  display: block;
+  width: 100%;
+  padding-top: 56.25%; /* 16:9 aspect ratio */
+}
+/* Optional: clamp excerpt inside cards */
+body.blog .card .muted,
+body.blog .card p {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;     /* adjust lines as you like */
+  -webkit-box-orient: vertical;
+}
+/* Make the image/video fill the 16:9 box cleanly */
+body.blog .card > figure img,
+body.blog .card > figure video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;  /* crop to fill the box without distortion */
+  display: block;
+}
+/* Ensure all non-figure content takes its natural height */
+body.blog .card > *:not(figure) {
+  flex: 0 0 auto;
 }
 body.blog .card:hover {
   transform: translateY(-2px);
