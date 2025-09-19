@@ -187,10 +187,34 @@ body.blog .pagination { margin-top: 1.5rem; display:flex; gap:.75rem; justify-co
 body.blog .pagination a { border: 1px solid var(--card-border); border-radius: 6px; padding: .35rem .7rem; }
 body.blog .pagination a:hover { background: rgba(0,0,0,.06); }
 
-/* ----- Utilities ----- */
-body.blog .sr-only {
-  position: absolute !important; height: 1px; width: 1px; overflow: hidden; clip: rect(1px,1px,1px,1px);
-  white-space: nowrap; border: 0; padding: 0; margin: -1px;
+/* ----- Footer links (back-to-blog and go-home) ----- */
+body.blog footer {
+  padding: 1.5rem var(--gutter);
+}
+
+body.blog #back-to-blog,
+body.blog #go-home {
+  margin: 0.5rem 0;
+}
+
+body.blog #go-home {
+  margin-left: 1rem;   /* base indent */
+}
+
+body.blog #back-to-blog {
+  margin-left: 2rem;   /* further indent than go-home */
+}
+
+body.blog #back-to-blog a,
+body.blog #go-home a {
+  color: #222;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+body.blog #back-to-blog a:hover,
+body.blog #go-home a:hover {
+  text-decoration: underline;
 }
 
 /* ----- Responsive polish to match site’s portrait tweaks ----- */
