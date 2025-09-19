@@ -2,9 +2,8 @@
 body.blog {
   --maxw: 70ch;
   --gutter: clamp(1rem, 3vw, 2rem);
-  --muted: #6b7280; /* tweak to match your palette */
+  --muted: #6b7280;
 }
-
 body.blog #content {
   max-width: var(--maxw);
   margin: 0 auto;
@@ -19,7 +18,7 @@ body.blog h3 { font-size: clamp(1.2rem, 2.2vw, 1.35rem); margin: 1.5rem 0 .35rem
 body.blog p  { margin: 0 0 1rem; }
 body.blog .muted { color: var(--muted); }
 
-/* Make images behave */
+/* Images & media */
 body.blog img, body.blog video, body.blog iframe {
   display: block;
   max-width: 100%;
@@ -31,9 +30,7 @@ body.blog figcaption { color: var(--muted); font-size: .95rem; text-align: cente
 
 /* Post list (cards) */
 body.blog .cards { display: grid; gap: 1.25rem; }
-@media (min-width: 760px) {
-  body.blog .cards { grid-template-columns: repeat(2, 1fr); }
-}
+@media (min-width: 760px) { body.blog .cards { grid-template-columns: repeat(2, 1fr); } }
 body.blog .card {
   border: 1px solid rgba(0,0,0,.08);
   border-radius: 10px;
@@ -57,17 +54,13 @@ body.blog .post .tags li {
   background: rgba(0,0,0,.05);
 }
 
-/* Blockquotes & code */
+/* Quotes & code */
 body.blog blockquote {
   margin: 1rem 0; padding: .75rem 1rem; border-left: 4px solid rgba(0,0,0,.15);
   background: rgba(0,0,0,.03);
 }
-body.blog pre, body.blog code {
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-}
-body.blog pre {
-  overflow:auto; padding: 1rem; border-radius: 8px; background:#0f172a; color:#e5e7eb;
-}
+body.blog pre, body.blog code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+body.blog pre { overflow:auto; padding: 1rem; border-radius: 8px; background:#0f172a; color:#e5e7eb; }
 
 /* Language switcher */
 body.blog .lang-switch ul { display:flex; gap:.75rem; list-style:none; padding:0; margin:.75rem 0 1.25rem; }
@@ -75,4 +68,4 @@ body.blog .lang-switch a { text-decoration:none; }
 body.blog .lang-switch .active a { text-decoration:underline; }
 
 /* Pagination */
-body.blog .pagination { margin-top: 1.5rem; display:flex; gap:.75rem; justify-content: center; }
+body.blog .pagination { margin-top: 1.5rem; display:flex; gap:.75rem; justify-content:center; }
