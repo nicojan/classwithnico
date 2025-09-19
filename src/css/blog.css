@@ -28,7 +28,6 @@ body.blog h6 {
   margin-top: 1rem;
   margin-bottom: 0.25rem;
 }
-body.blog h1 { padding: 10px; }
 body.blog p { margin: 0 0 1rem; }
 body.blog .muted { color: var(--muted); }
 
