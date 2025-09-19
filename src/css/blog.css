@@ -29,7 +29,10 @@ body.blog h6 {
   margin-bottom: 0.25rem;
 }
 body.blog p { margin: 0 0 1rem; }
-body.blog .muted { color: var(--muted); }
+body.blog .muted { 
+  color: var(--muted); 
+  font-size: 0.8rem;
+}
 
 /* Links — mirror site behavior (subtle hover) */
 body.blog a {
