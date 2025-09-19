@@ -227,8 +227,22 @@ body.blog #go-home a:hover {
   .navbar { display: none !important; }
   .mobile-navbar { display: block !important; }
 
+  body.blog #site-navbar,
+  body.blog .mobile-navbar,
+  body.blog .mobile-navbar .header {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+
+  body.blog { 
+    margin-top: 0 !important;     /* kill any global margin-top from style.css */
+  }
+  
   /* Comfortable reading width and spacing on phones */
-  body.blog #content { --maxw: 68ch; padding-top: 2.75rem; }
+  body.blog #content {
+    --maxw: 68ch; 
+    padding-top: 1rem; 
+  }
 
   /* Card layout becomes single column */
   body.blog .cards { grid-template-columns: 1fr; }
