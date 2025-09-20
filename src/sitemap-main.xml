@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- Home -->
+  <url>
+    <loc>https://classwith.nicojan.com/</loc>
+  </url>
+
+  <!-- About (EN / ZH alternates) -->
+  <url>
+    <loc>https://classwith.nicojan.com/about.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://classwith.nicojan.com/about.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://classwith.nicojan.com/about-zh.html"/>
+  </url>
+  <url>
+    <loc>https://classwith.nicojan.com/about-zh.html</loc>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://classwith.nicojan.com/about-zh.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://classwith.nicojan.com/about.html"/>
+  </url>
+
+  <!-- Services (EN / ZH alternates) -->
+  <url>
+    <loc>https://classwith.nicojan.com/services.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://classwith.nicojan.com/services.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://classwith.nicojan.com/services-zh.html"/>
+  </url>
+  <url>
+    <loc>https://classwith.nicojan.com/services-zh.html</loc>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://classwith.nicojan.com/services-zh.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://classwith.nicojan.com/services.html"/>
+  </url>
+
+  <!-- Blog landing pages (posts themselves live in /blog/sitemap.xml) -->
+  <url>
+    <loc>https://classwith.nicojan.com/blog/</loc>
+  </url>
+  <url>
+    <loc>https://classwith.nicojan.com/blog/en/</loc>
+  </url>
+  <url>
+    <loc>https://classwith.nicojan.com/blog/zh/</loc>
+  </url>
+  <url>
+    <loc>https://classwith.nicojan.com/blog/categories/</loc>
+  </url>
+  <url>
+    <loc>https://classwith.nicojan.com/blog/tags/</loc>
+  </url>
+
+</urlset>
