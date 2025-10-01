@@ -10,26 +10,26 @@
 
   <!-- About (EN / ZH alternates) -->
   <url>
-    <loc>https://classwith.nicojan.com/about.html</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://classwith.nicojan.com/about.html"/>
-    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://classwith.nicojan.com/about-zh.html"/>
+    <loc>https://classwith.nicojan.com/about/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://classwith.nicojan.com/about/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://classwith.nicojan.com/about-zh/"/>
   </url>
   <url>
-    <loc>https://classwith.nicojan.com/about-zh.html</loc>
-    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://classwith.nicojan.com/about-zh.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://classwith.nicojan.com/about.html"/>
+    <loc>https://classwith.nicojan.com/about-zh/</loc>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://classwith.nicojan.com/about-zh/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://classwith.nicojan.com/about/"/>
   </url>
 
   <!-- Services (EN / ZH alternates) -->
   <url>
-    <loc>https://classwith.nicojan.com/services.html</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://classwith.nicojan.com/services.html"/>
-    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://classwith.nicojan.com/services-zh.html"/>
+    <loc>https://classwith.nicojan.com/services/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://classwith.nicojan.com/services/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://classwith.nicojan.com/services-zh/"/>
   </url>
   <url>
-    <loc>https://classwith.nicojan.com/services-zh.html</loc>
-    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://classwith.nicojan.com/services-zh.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://classwith.nicojan.com/services.html"/>
+    <loc>https://classwith.nicojan.com/services-zh/</loc>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://classwith.nicojan.com/services-zh/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://classwith.nicojan.com/services/"/>
   </url>
 
   <!-- Blog landing pages (posts themselves live in /blog/sitemap.xml) -->
