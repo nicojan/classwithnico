@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Pixelated Bard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --parchment: #d4c598;
+            --parchment-dark: #c1b07e;
+            --ink: #2c1810;
+            --royal-red: #8a1c1c;
+            --gold: #d4af37;
+        }
+
+        body {
+            background-color: #1a1a1a;
+            background-image: radial-gradient(#2a2a2a 1px, transparent 1px);
+            background-size: 20px 20px;
+            font-family: 'MedievalSharp', cursive;
+            color: var(--ink);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .scroll-container {
+            background-color: var(--parchment);
+            width: 100%;
+            max-width: 800px;
+            border: 8px solid var(--ink);
+            border-radius: 4px;
+            box-shadow: 0 0 0 4px var(--gold), 0 20px 50px rgba(0,0,0,0.7);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 8-bit corner decorations */
+        .corner {
+            position: absolute;
+            width: 32px;
+            height: 32px;
+            background-color: var(--royal-red);
+            image-rendering: pixelated;
+        }
+        .tl { top: 0; left: 0; clip-path: polygon(0 0, 100% 0, 100% 20%, 20% 20%, 20% 100%, 0 100%); }
+        .tr { top: 0; right: 0; clip-path: polygon(0 0, 100% 0, 100% 100%, 80% 100%, 80% 20%, 0 20%); }
+        .bl { bottom: 0; left: 0; clip-path: polygon(0 0, 20% 0, 20% 80%, 100% 80%, 100% 100%, 0 100%); }
+        .br { bottom: 0; right: 0; clip-path: polygon(80% 0, 100% 0, 100% 100%, 0 100%, 0 80%, 80% 80%); }
+
+        .pixel-font {
+            font-family: 'Press Start 2P', cursive;
+        }
+
+        .illuminated-letter {
+            float: left;
+            font-size: 5rem; /* Increased size */
+            line-height: 0.8;
+            padding-right: 12px;
+            padding-left: 8px;
+            color: var(--royal-red);
+            font-family: 'MedievalSharp', cursive;
+            border: 3px solid var(--gold);
+            margin-right: 12px;
+            margin-top: 8px;
+            background: #fff8dc;
+            box-shadow: 3px 3px 0 var(--ink);
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            background: transparent;
+            border: 4px solid var(--ink);
+            padding: 1rem;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.8rem;
+            color: var(--ink);
+            outline: none;
+        }
+
+        input[type="text"]::placeholder {
+            color: rgba(44, 24, 16, 0.5);
+        }
+
+        input[type="text"]:focus {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-medieval {
+            background-color: var(--royal-red);
+            color: var(--parchment);
+            border: 4px solid var(--ink);
+            padding: 1rem 2rem;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: transform 0.1s, box-shadow 0.1s;
+            text-transform: uppercase;
+            box-shadow: 4px 4px 0 var(--ink);
+            width: 100%;
+        }
+
+        .btn-medieval:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0 var(--ink);
+        }
+
+        .btn-medieval:active {
+            transform: translate(2px, 2px);
+            box-shadow: 0 0 0 var(--ink);
+        }
+
+        .btn-medieval:disabled {
+            background-color: #555;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: 4px 4px 0 var(--ink);
+        }
+
+        .loader {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            background-color: var(--parchment);
+            box-shadow: 20px 0 var(--ink), -20px 0 var(--ink);
+            animation: pixel-loader 1s infinite alternate;
+        }
+
+        @keyframes pixel-loader {
+            0% { box-shadow: 20px 0 var(--ink), -20px 0 var(--parchment); background: var(--parchment); }
+            50% { box-shadow: 20px 0 var(--parchment), -20px 0 var(--parchment); background: var(--ink); }
+            100% { box-shadow: 20px 0 var(--parchment), -20px 0 var(--ink); background: var(--parchment); }
+        }
+
+        /* New class for the frame around the image and caption */
+        .image-frame {
+            border: 4px double var(--ink);
+            padding: 8px;
+            background-color: rgba(0,0,0,0.05);
+            margin-bottom: 2rem;
+        }
+
+        .generated-image {
+            image-rendering: pixelated;
+            /* removed border and shadow from here, moved to frame */
+            width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            background-color: #ddd;
+        }
+
+        .sonnet-text {
+            line-height: 1.6;
+            font-size: 1.3rem; /* Slightly larger text */
+            white-space: pre-wrap;
+        }
+        
+        /* Separator line */
+        .separator {
+            border: 0;
+            height: 2px;
+            background-image: linear-gradient(to right, transparent, var(--ink), transparent);
+            margin: 2rem 0;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--parchment-dark);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--ink);
+            border: 2px solid var(--parchment);
+        }
+
+        .error-box {
+            background-color: #ffcccc;
+            border: 4px solid #8a1c1c;
+            color: #8a1c1c;
+            padding: 1rem;
+            margin-top: 1rem;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.7rem;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="scroll-container p-6 md:p-12">
+        <!-- Decorative Corners -->
+        <div class="corner tl"></div>
+        <div class="corner tr"></div>
+        <div class="corner bl"></div>
+        <div class="corner br"></div>
+
+        <!-- Header -->
+        <div class="text-center mb-8 border-b-4 border-[var(--ink)] pb-6">
+            <h1 class="pixel-font text-xl md:text-2xl mb-2 text-[var(--royal-red)]" style="text-shadow: 2px 2px 0 var(--parchment);">The Pixelated Bard</h1>
+            <p class="italic opacity-80">"Enter a subject, receive a Sonnet"</p>
+        </div>
+
+        <!-- Input Section -->
+        <div class="input-section" id="inputSection">
+            <div class="input-group">
+                <label class="block pixel-font text-[0.6rem] mb-2 uppercase tracking-wider">Thy Chosen Topic:</label>
+                <input type="text" id="topicInput" placeholder="e.g. A Glitch in the Matrix, Morning Coffee, The Dragon's Hoard" onkeypress="handleEnter(event)">
+            </div>
+            
+            <button class="btn-medieval" onclick="startGeneration()" id="generateBtn">
+                Compose Manuscript
+            </button>
+        </div>
+
+        <!-- Loading State -->
+        <div id="loadingSection" class="hidden text-center py-12">
+            <div class="loader mb-6 mx-auto"></div>
+            <p class="pixel-font text-xs animate-pulse">The Bard is pondering...</p>
+            <p id="loadingStatus" class="text-sm mt-2 italic">Mixing ink...</p>
+        </div>
+
+        <!-- Result Section - Revised Layout -->
+        <div id="resultSection" class="hidden">
+            <div class="flex flex-col items-center">
+                
+                <!-- Image Container with Frame -->
+                <div class="w-full max-w-2xl image-frame">
+                    <img id="bardImage" src="" alt="Generated Pixel Art" class="generated-image">
+                    <div class="text-center mt-2">
+                        <span class="pixel-font text-[0.5rem] bg-[var(--ink)] text-[var(--parchment)] px-2 py-1 inline-block">FIG I.</span>
+                    </div>
+                </div>
+
+                <!-- Decorative Separator -->
+                <hr class="separator w-full max-w-2xl">
+
+                <!-- Poem Container - Removed box styling -->
+                <div class="w-full max-w-2xl text-left">
+                    <div class="sonnet-text relative p-4">
+                        <span id="illuminatedInitial" class="illuminated-letter pixel-font"></span>
+                        <div id="sonnetContent"></div>
+                    </div>
+                    
+                    <div class="mt-8 flex gap-4 justify-center">
+                        <button class="btn-medieval md:w-auto !py-3 !text-[0.6rem]" onclick="resetApp()">
+                            Write Another
+                        </button>
+                        <button class="btn-medieval md:w-auto !py-3 !text-[0.6rem] !bg-[var(--ink)]" onclick="copySonnet()">
+                            Copy Text
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Error Box -->
+        <div id="errorBox" class="error-box"></div>
+        
+    </div>
+
+    <script>
+        const apiKey = ""; // Runtime provided environment key
+        
+        const inputSection = document.getElementById('inputSection');
+        const loadingSection = document.getElementById('loadingSection');
+        const resultSection = document.getElementById('resultSection');
+        const generateBtn = document.getElementById('generateBtn');
+        const loadingStatus = document.getElementById('loadingStatus');
+        const errorBox = document.getElementById('errorBox');
+        const topicInput = document.getElementById('topicInput');
+
+        function handleEnter(e) {
+            if (e.key === 'Enter') {
+                startGeneration();
+            }
+        }
+
+        async function startGeneration() {
+            const topic = topicInput.value.trim();
+            if (!topic) {
+                showError("Pray, enter a topic before summoning the bard.");
+                return;
+            }
+
+            // UI State Update
+            inputSection.classList.add('hidden');
+            resultSection.classList.add('hidden');
+            errorBox.style.display = 'none';
+            loadingSection.classList.remove('hidden');
+            generateBtn.disabled = true;
+
+            try {
+                // Parallel execution for speed, but we handle errors individually
+                loadingStatus.textContent = "Consulting the Muses...";
+                
+                // 1. Generate Sonnet
+                const sonnetPromise = generateText(topic);
+                
+                // 2. Generate Image
+                loadingStatus.textContent = "Illuminating the manuscript...";
+                const imagePromise = generateImage(topic);
+
+                const [sonnet, imageUrl] = await Promise.all([sonnetPromise, imagePromise]);
+
+                displayResults(sonnet, imageUrl);
+
+            } catch (error) {
+                console.error(error);
+                showError("Alas! The magic has failed. " + error.message);
+                inputSection.classList.remove('hidden');
+                loadingSection.classList.add('hidden');
+                generateBtn.disabled = false;
+            }
+        }
+
+        async function generateText(topic) {
+            const systemPrompt = "You are a medieval bard who writes Shakespearean sonnets. Write a sonnet about the user's topic. Use archaic language (thee, thou, hath). Format it clearly with line breaks. Do not include a title, just the poem.";
+            const userPrompt = `Write a sonnet about: ${topic}`;
+
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+
+            const payload = {
+                contents: [{ parts: [{ text: userPrompt }] }],
+                systemInstruction: { parts: [{ text: systemPrompt }] }
+            };
+
+            const response = await fetchWithBackoff(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            const data = await response.json();
+            return data.candidates?.[0]?.content?.parts?.[0]?.text || "The bard is silent.";
+        }
+
+        async function generateImage(topic) {
+            const prompt = `8-bit pixel art style, a medieval illuminated manuscript illustration of ${topic}, retro rpg game style, parchment background, low resolution aesthetic, simple colors`;
+            
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/imagen-4.0-generate-001:predict?key=${apiKey}`;
+            
+            const payload = {
+                instances: [{ prompt: prompt }],
+                parameters: { sampleCount: 1 }
+            };
+
+            const response = await fetchWithBackoff(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            const data = await response.json();
+            
+            if (data.predictions && data.predictions[0] && data.predictions[0].bytesBase64Encoded) {
+                return `data:image/png;base64,${data.predictions[0].bytesBase64Encoded}`;
+            } else {
+                throw new Error("The artist dropped their brush.");
+            }
+        }
+
+        // Exponential Backoff Implementation
+        async function fetchWithBackoff(url, options, maxRetries = 3) {
+            let delay = 1000;
+            for (let i = 0; i < maxRetries; i++) {
+                try {
+                    const response = await fetch(url, options);
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response;
+                } catch (error) {
+                    if (i === maxRetries - 1) throw error;
+                    await new Promise(r => setTimeout(r, delay));
+                    delay *= 2;
+                }
+            }
+        }
+
+        function displayResults(sonnet, imageUrl) {
+            loadingSection.classList.add('hidden');
+            resultSection.classList.remove('hidden');
+
+            // Format Text
+            // We want to extract the first letter for the drop cap
+            const cleanSonnet = sonnet.trim();
+            const firstLetter = cleanSonnet.charAt(0);
+            const restOfSonnet = cleanSonnet.substring(1);
+
+            document.getElementById('illuminatedInitial').textContent = firstLetter;
+            document.getElementById('sonnetContent').innerHTML = restOfSonnet.replace(/\n/g, '<br>');
+            
+            // Set Image
+            const img = document.getElementById('bardImage');
+            img.src = imageUrl;
+            img.onload = () => {
+                // Ensure layout recalculates if needed
+            };
+        }
+
+        function showError(msg) {
+            errorBox.textContent = msg;
+            errorBox.style.display = 'block';
+        }
+
+        function resetApp() {
+            resultSection.classList.add('hidden');
+            inputSection.classList.remove('hidden');
+            topicInput.value = '';
+            generateBtn.disabled = false;
+            errorBox.style.display = 'none';
+        }
+
+        function copySonnet() {
+            const firstLetter = document.getElementById('illuminatedInitial').textContent;
+            const rest = document.getElementById('sonnetContent').innerText;
+            const fullText = firstLetter + rest;
+            
+            const textArea = document.createElement("textarea");
+            textArea.value = fullText;
+            document.body.appendChild(textArea);
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                const btn = document.querySelector('button[onclick="copySonnet()"]');
+                const originalText = btn.textContent;
+                btn.textContent = "Copied!";
+                setTimeout(() => btn.textContent = originalText, 2000);
+            } catch (err) {
+                showError("Could not copy to clipboard");
+            }
+            document.body.removeChild(textArea);
+        }
+    </script>
+</body>
+</html>
