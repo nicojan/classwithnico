@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Pocket Dystopia</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+        :root {
+            --bg-color: #050505;
+            --term-green: #33ff00;
+            --term-red: #ff3333;
+            --term-dim: #1a8000;
+        }
+
+        * {
+            box-sizing: border-box; /* Prevents padding from breaking mobile layout */
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--term-green);
+            font-family: 'VT323', monospace;
+            margin: 0;
+            padding: 10px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+            -webkit-font-smoothing: none; /* Keeps pixels crisp */
+        }
+
+        /* CRT Scanline Effect - Optimized for mobile performance */
+        body::before {
+            content: " ";
+            display: block;
+            position: fixed; /* Fixed so it doesn't scroll away */
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 999;
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none; /* Lets you click through the overlay */
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 8vw, 4rem); /* Scales with screen size */
+            text-shadow: 2px 2px var(--term-red);
+            margin: 10px 0 5px 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: glitch 1s linear infinite;
+            text-align: center;
+            line-height: 1;
+        }
+
+        .subtitle {
+            margin-bottom: 15px;
+            color: var(--term-dim);
+            text-align: center;
+            font-size: 1.2rem;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px; /* Cap width for desktops */
+            border: 2px solid var(--term-green);
+            padding: 15px;
+            box-shadow: 0 0 10px var(--term-dim);
+            background-color: #000;
+            position: relative;
+            z-index: 10;
+            margin-bottom: 20px;
+        }
+
+        .btn-container {
+            position: sticky; /* Keeps button accessible if content gets long */
+            top: 10px;
+            z-index: 20;
+            background: rgba(0,0,0,0.9);
+            padding: 10px 0;
+            text-align: center;
+            border-bottom: 1px dashed var(--term-dim);
+            margin-bottom: 20px;
+        }
+
+        button {
+            background: #000;
+            color: var(--term-red);
+            border: 2px solid var(--term-red);
+            font-family: 'VT323', monospace;
+            font-size: 1.8rem;
+            padding: 12px 20px;
+            width: 100%; /* Full width button on mobile */
+            cursor: pointer;
+            text-transform: uppercase;
+            box-shadow: 0 0 5px var(--term-red);
+            touch-action: manipulation; /* Improves touch response */
+        }
+
+        button:active {
+            background: var(--term-red);
+            color: #000;
+            transform: translateY(2px);
+        }
+
+        .result-area {
+            display: none;
+            padding-bottom: 20px;
+        }
+
+        .section {
+            margin-bottom: 25px;
+            border-left: 2px solid var(--term-dim);
+            padding-left: 10px;
+        }
+
+        .label {
+            color: var(--term-red);
+            text-transform: uppercase;
+            font-weight: bold;
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        ul {
+            list-style-type: none; /* Remove default bullets to save space */
+            padding-left: 0;
+            margin: 0;
+        }
+
+        li {
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 15px;
+            line-height: 1.2;
+        }
+
+        li::before {
+            content: ">";
+            position: absolute;
+            left: 0;
+            color: var(--term-dim);
+        }
+
+        /* Glitch Animation */
+        @keyframes glitch {
+            2%, 64% { transform: translate(2px,0) skew(0deg); }
+            4%, 60% { transform: translate(-2px,0) skew(0deg); }
+            62% { transform: translate(0,0) skew(5deg); }
+        }
+
+        .flicker { animation: flicker 0.15s infinite; }
+        @keyframes flicker {
+            0% { opacity: 0.9; } 50% { opacity: 1.0; } 100% { opacity: 0.9; }
+        }
+
+        /* Mobile specific adjustments */
+        @media (max-width: 400px) {
+            h1 { font-size: 2.8rem; }
+            li { font-size: 1.1rem; }
+            button { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <h1 class="flicker">POCKET DYSTOPIA</h1>
+
+    <div class="container">
+        <div class="btn-container">
+            <button onclick="generateNightmare()">[ ROLL THE DIE ]</button>
+        </div>
+
+        <div id="output" class="result-area">
+            </div>
+    </div>
+
+    <script>
+        // DATA SETS - The Satirical Collection
+        const sideChars = [
+            "Loyal but terrified (Red Shirt #1)",
+            "Secretly resistance (Has a cool tattoo)",
+            "Annoyingly optimistic despite acid rain",
+            "Scavenger who hoards spoons",
+            "Ex-Gov worker: 'I shouldn't say this...'",
+            "Medic who uses dirty bandages",
+            "Elder: 'I remember trees...'",
+            "Tech-kid (fixes fusion drives with gum)",
+            "Silent brooding type (Low budget)",
+            "Citizen who reads the Terms of Service"
+        ];
+
+        const protagTraits = [
+            "Found a book, now thinks they are 'The One'",
+            "Too empathetic for this cruel world",
+            "Parkour expert (Run. Jump. Repeat.)",
+            "Can hack the mainframe in < 3 seconds",
+            "Rebellious streak (Hates beige)",
+            "Obnoxious sense of justice",
+            "Thinking fast, acting stupid",
+            "The 'Chosen One' (Generic Variant B)",
+            "Has a robot arm or glowy eye",
+            "Must find THE TRUTH (Caps Lock on)"
+        ];
+
+        const protagWeakness = [
+            "Trusts the villain immediately",
+            "Abandonment issues (Classic)",
+            "Guilt over Chapter 1",
+            "Punches walls when angry",
+            "Physically frail but has 'heart'",
+            "Thinks they are invincible (Spoiler: no)",
+            "Will die for their cat",
+            "Cannot follow simple instructions",
+            "Panic attacks triggered by beeping",
+            "Trackable via their microchip"
+        ];
+
+        const antagonist = [
+            "Sexy dictator with great hair",
+            "Bureaucrat who loves paperwork",
+            "Tech-bro uploading brains to the cloud",
+            "Angry General shouting at screens",
+            "CEO of Water™",
+            "Scientist: 'I'm saving humanity by killing it'",
+            "Purity Obsessive (Bleaches everything)",
+            "Politician hiding aliens",
+            "HAL 9000 but with more sass",
+            "Cult leader in expensive linen"
+        ];
+
+        const antagWeakness = [
+            "Monologues their plan",
+            "Ignored 'The Power of Friendship'",
+            "Forgot to update the firewall",
+            "Minions are unionizing",
+            "OCD about symmetry",
+            "Fragile ego (Hates bad Yelp reviews)",
+            "Actually 3 kids in a trench coat",
+            "Secretly loves the hero's mom",
+            "Hiding a mutated tail",
+            "Relies on Windows 95"
+        ];
+
+        const settings = [
+            "Sector 7 (It's always Sector 7)",
+            "The Tunnels (Smells like wet dog)",
+            "Zone A vs. Zone Z",
+            "Cloud City (Oxygen subscription required)",
+            "The Great Dust Bowl 2.0",
+            "Radioactive Forest of Death",
+            "Rickety bridges between skyscrapers",
+            "Spooky Lab with flickering lights",
+            "Too Cold To Live: The City",
+            "Underground Bunker #404"
+        ];
+
+        const times = [
+            "Tuesday, next week (Economy bad)",
+            "2099 (Everything is chrome)",
+            "The Year of Our AI Overlord",
+            "Post-Super-Flu Era",
+            "100 years after Aliens laughed at us",
+            "Day 1 of the New Regime",
+            "Timeline confusingly similar to now",
+            "The Age of Beige Uniforms",
+            "Mars (Earth is a parking lot)",
+            "Alternate 1985"
+        ];
+
+        const traumas = [
+            "Parents taken by men in masks",
+            "House blew up (Character building!)",
+            "Boarding school for sad children",
+            "Starved a little bit",
+            "Exiled for having blue hair",
+            "Bubble boy/girl upbringing",
+            "Accidental snitch",
+            "Survived the 'Great Purge'",
+            "Brainwashed by TV commercials",
+            "Tested on like a lab rat"
+        ];
+
+        const obstacles = [
+            "Drones with bad aim",
+            "Acid rain / Toxic fog",
+            "Top 10 Anime Betrayals",
+            "Vending machine out of water",
+            "Road closed (Construction forever)",
+            "The bomb timer is ticking",
+            "Mom calls via hologram to guilt trip",
+            "The laser gun jammed",
+            "Sophie's Choice but with sandwiches",
+            "Existential dread"
+        ];
+
+        function getItems(array, count) {
+            const shuffled = array.sort(() => 0.5 - Math.random());
+            return shuffled.slice(0, count);
+        }
+
+        function generateNightmare() {
+            const out = document.getElementById('output');
+            
+            // Generate Data
+            const pChars = getItems(protagTraits, 3);
+            const pWeak = getItems(protagWeakness, 1);
+            const aChars = getItems(antagonist, 3);
+            const aWeak = getItems(antagWeakness, 1);
+            const sChars = getItems(sideChars, 3);
+            const set = getItems(settings, 1);
+            const time = getItems(times, 1);
+            const trau = getItems(traumas, 1);
+            const obs = getItems(obstacles, 2);
+
+            // Construct HTML
+            let html = `
+                <div class="section">
+                    <div class="label">>> THE HERO</div>
+                    <ul>
+                        ${pChars.map(i => `<li>${i}</li>`).join('')}
+                        <li style="color:var(--term-red)">WEAK: ${pWeak}</li>
+                        <li style="color:violet">TRAUMA: ${trau}</li>
+                    </ul>
+                </div>
+
+                <div class="section">
+                    <div class="label">>> THE VILLAIN</div>
+                    <ul>
+                        ${aChars.map(i => `<li>${i}</li>`).join('')}
+                        <li style="color:var(--term-red)">WEAK: ${aWeak}</li>
+                    </ul>
+                </div>
+
+                <div class="section">
+                    <div class="label">>> THE SQUAD</div>
+                    <ul>
+                        ${sChars.map(i => `<li>${i}</li>`).join('')}
+                    </ul>
+                </div>
+
+                <div class="section">
+                    <div class="label">>> THE SETTING</div>
+                    <ul>
+                        <li>WHEN: ${time}</li>
+                        <li>WHERE: ${set}</li>
+                    </ul>
+                </div>
+
+                <div class="section">
+                    <div class="label">>> OBSTACLES</div>
+                    <ul>
+                        ${obs.map(i => `<li>${i}</li>`).join('')}
+                    </ul>
+                </div>
+                
+                <div style="text-align:center; margin-top:30px; border:1px solid var(--term-green); padding:10px; font-size: 1.2rem;">
+                    STATUS: PLOT ARMOR ENGAGED
+                </div>
+            `;
+
+            out.innerHTML = html;
+            out.style.display = 'block';
+            
+            // Smooth scroll to results (setTimeout ensures rendering finishes)
+            setTimeout(() => {
+                const btnHeight = document.querySelector('.btn-container').offsetHeight;
+                const containerTop = document.querySelector('.container').offsetTop;
+                window.scrollTo({
+                    top: containerTop + btnHeight,
+                    behavior: 'smooth'
+                });
+            }, 100);
+        }
+    </script>
+</body>
+</html>
