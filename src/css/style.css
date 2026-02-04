@@ -711,7 +711,6 @@ h4 {
   }
   .english {
     width: 100%;
-    max-width: 38ch;
   }
 
   /* zh column: horizontal for readability */
