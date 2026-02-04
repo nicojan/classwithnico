@@ -5,17 +5,19 @@
 /* Shared container width + side padding to match navbar/content rhythm */
 .svc-container {
   width: 100%;
-  max-width: 1200px;      /* matches .navbar-content max-width */
+  max-width: 1200px; /* matches .navbar-content max-width */
   margin-left: auto;
   margin-right: auto;
-  padding-left: 2rem;     /* matches .navbar-content side padding */
-  padding-right: 2rem;    /* keeps left/right distance consistent with content below */
+  padding-left: 2rem; /* matches .navbar-content side padding */
+  padding-right: 2rem; /* keeps left/right distance consistent with content below */
   box-sizing: border-box;
 }
 
 /* Top header block for the page (title + blurb) */
 .subpage-header {
-  margin-top: calc(10vh + 1.5rem); /* clear fixed navbar (10vh) + breathing room */
+  margin-top: calc(
+    10vh + 1.5rem
+  ); /* clear fixed navbar (10vh) + breathing room */
   margin-bottom: 2rem;
 }
 
@@ -43,7 +45,7 @@
 /* ---- Lists ---- */
 
 .service-bullets {
-  list-style: none;       /* remove default bullets for a cleaner look */
+  list-style: none; /* remove default bullets for a cleaner look */
   margin: 0.75rem 0 0 0;
   padding: 0;
 }
@@ -63,22 +65,23 @@
 }
 
 /* ---- Typography polish for this page ---- */
-#main-content h1, #main-content h2 {
+#main-content h1,
+#main-content h2 {
   /* --- Quieter headings to mimic homepage --- */
 }
 .h-quiet {
-  font-weight: 500;          /* lighter than bold */
+  font-weight: 500; /* lighter than bold */
   letter-spacing: 0.1px;
-  text-transform: none;      /* ensure no accidental uppercase */
-  color: inherit;            /* use body text color */
+  text-transform: none; /* ensure no accidental uppercase */
+  color: inherit; /* use body text color */
 }
 
 /* H1: subtle, closer to body scale */
 #main-content h1,
 #main-content h2 {
-  font-size: 1rem;      /* same as body */
-  font-weight: 600;     /* bold for contrast */
-  line-height: 1.5;     /* match paragraph rhythm */
+  font-size: 1rem; /* same as body */
+  font-weight: 600; /* bold for contrast */
+  line-height: 1.5; /* match paragraph rhythm */
   margin-top: 1rem;
   margin-bottom: 0.25rem;
 }
@@ -91,24 +94,26 @@
 /* Portrait (any) — align with global portrait paddings */
 @media (orientation: portrait) {
   .subpage-header {
-    margin-top: calc(10vh + 1rem); /* slightly tighter on small vertical screens */
+    margin-top: calc(
+      10vh + 1rem
+    ); /* slightly tighter on small vertical screens */
   }
   .subpage-blurb {
     font-size: 1rem;
   }
 }
 
-/* Phone Portrait (≤500px) — follow mobile navbar behavior in style.css */
-@media (max-width: 500px) and (orientation: portrait) {
+/* Mobile (≤1000px) — follow mobile navbar behavior in style.css */
+@media (max-width: 1000px) {
   .svc-container {
-    padding-left: 5vw;    /* match .navbar-content portrait padding */
+    padding-left: 5vw; /* match .navbar-content portrait padding */
     padding-right: 5vw;
   }
   .subpage-header {
     margin-top: 0;
   }
   .subpage-blurb {
-    max-width: 85ch;      /* allow a bit wider measure on small screens */
+    max-width: 85ch; /* allow a bit wider measure on small screens */
   }
 }
 

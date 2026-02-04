@@ -410,10 +410,10 @@ body {
 }
 
 /* ---------------------------------------------------------------
-   2) Phones Portrait — max-width: 500px
+   2) Mobile — max-width: 1000px
 ---------------------------------------------------------------- */
-@media (max-width: 500px) and (orientation: portrait) {
-  /* Phones Portrait — consolidated and conflict-free */
+@media (max-width: 1000px) {
+  /* Mobile widths (≤1000px) — consolidated and conflict-free */
 
   /* Tighter header at top of page */
   .subpage-header {

@@ -289,7 +289,7 @@ body.blog #go-home a:hover {
   body.blog #content { padding: 1.75rem var(--gutter) 3.25rem; }
   body.blog .cards { gap: 1rem; }
 }
-@media (max-width: 500px) and (orientation: portrait) {
+@media (max-width: 1000px) {
   /* Hide desktop navbar, show mobile (site CSS already does this; mirror for safety) */
   .navbar { display: none !important; }
   .mobile-navbar { display: block !important; }
