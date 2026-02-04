@@ -1,0 +1,43 @@
+# macOS cruft
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Node/JS dependencies & builds
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+dist/
+build/
+.parcel-cache/
+.cache/
+
+# Env & secrets (keep .env.example tracked)
+.env
+.env.*
+!.env.example
+
+# Logs & coverage
+*.log
+logs/
+coverage/
+
+# Editors/IDE
+.vscode/
+.idea/
+*.swp
+*~
+
+# Misc temporary files
+.DS_Store?
+*.tmp
+*.temp
+.sass-cache/
+.grunt/
