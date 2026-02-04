@@ -1,0 +1,100 @@
+# /Volumes/n1TB/GDrive (Teaching)/Branding/Blog/hugo.toml
+
+# Your blog lives at /blog/ under the main site
+baseURL = "https://classwith.nicojan.com/blog/"
+title = "Class with Nico — Blog"
+languageCode = "en"                    # site default lang key (must match a language below)
+defaultContentLanguage = "en"
+defaultContentLanguageInSubdir = false # EN at /blog/, other langs under /blog/<lang>/  (zh at /blog/zh/)
+timeZone = "America/Vancouver"
+
+# IMPORTANT: publish straight into your website repo so Cloudflare picks it up
+# 👇 replace this with your actual repo path
+publishDir = "../Development/blog"  # hugo supports publishDir for custom destinations.  [oai_citation:0‡Gohugo](https://gohugo.io/getting-started/usage/?utm_source=chatgpt.com)
+
+# Keep URLs clean and stable
+[permalinks]                        # per-section permalink rules
+posts = "/:year/:month/:slug/"      # date-based hierarchy for posts.  [oai_citation:1‡Gohugo](https://gohugo.io/configuration/permalinks/?utm_source=chatgpt.com)
+
+# Enable raw HTML in Markdown (for embeds, custom HTML in posts)
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true                 # Goldmark blocks inline HTML unless 'unsafe' is true.  [oai_citation:2‡Gohugo](https://gohugo.io/configuration/markup/?utm_source=chatgpt.com)
+
+# Make all generated URLs absolute (esp. important for RSS/OG at /blog/)
+canonifyURLs = true
+
+enableRobotsTXT = true
+
+[sitemap]
+  changefreq = "weekly"
+  priority   = 0.5
+  filename   = "sitemap.xml"
+
+[outputs]
+  home    = ["HTML", "RSS"]
+  section = ["HTML", "RSS"]
+  taxonomy = ["HTML", "RSS"]
+  term     = ["HTML", "RSS"]
+
+# Optional: put taxonomy feeds at predictable URLs (e.g., /blog/tags/mytag/index.xml)
+[taxonomies]
+  tag = "tags"
+  category = "categories"
+
+[frontmatter]
+  date  = ["date", "publishDate", "lastmod"]
+  lastmod = ["lastmod", ":git", "date", "publishDate"]
+  publishDate = ["publishDate", "date"]
+
+[minify]
+  minifyOutput = true
+
+# ---- Multilingual (single-host) ----
+# We'll keep English at /blog/ and Traditional Chinese at /blog/zh/
+# You can organize translations either by filename suffix (post.en.md / post.zh.md)
+# or by separate content folders (content/en/... and content/zh/...). Hugo supports both.  [oai_citation:3‡Gohugo](https://gohugo.io/content-management/multilingual/)
+
+[languages]
+
+  [languages.en]
+    languageName = "English"
+    languageCode = "en-CA"
+    weight = 1
+    contentDir = "content/en"       # per-language contentDir is supported and can be any valid path (non-overlapping).  [oai_citation:4‡Gohugo](https://gohugo.io/content-management/multilingual/)
+    title = "Class with Nico — Blog"
+    [languages.en.params]
+      locale = "en-CA"
+
+  [languages.zh]
+    languageName = "中文（繁體）"
+    languageCode = "zh-Hant-TW"
+    weight = 2
+    contentDir = "content/zh"       # mirrors EN structure for easy pairing.  [oai_citation:5‡Gohugo](https://gohugo.io/content-management/multilingual/)
+    title = "Class with Nico — 部落格"
+    [languages.zh.params]
+      locale = "zh-Hant-TW"
+
+[params]
+  og_image = "/images/showreel.png"
+  logo = "/images/logo_simple.svg"
+
+  # For <meta name="author"> in the head partial
+  author = "Nico Jan"
+  authorURL = "https://classwith.nicojan.com/about.html"
+
+  relme = [
+    "https://instagram.com/classwithnico",
+    "https://m.me/classwithnico",
+    "https://www.youtube.com/@classwithnico",
+    "https://wa.me/message/WPWMHXAIHI5CI1"
+  ]
+
+# Optional niceties
+paginate = 10
+paginatePath = "page"
+summaryLength = 24
+
+# If you later add language-specific menus, define them under each language
+# (Hugo expects per-language menu entries when menus are defined in config).  [oai_citation:6‡Gohugo](https://gohugo.io/content-management/multilingual/)

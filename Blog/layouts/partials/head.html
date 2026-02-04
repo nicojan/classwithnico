@@ -1,0 +1,139 @@
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  {{/* ========== Title ========== */}}
+  <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} · {{ .Site.Title }}{{ end }}</title>
+
+  {{/* ========== Styles ========== */}}
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/blog.css">
+
+
+  <link href="/images/favicon.png" rel="shortcut icon" type="image/x-icon">
+
+  {{/* ========== Preconnects ========== */}}
+  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+  <link rel="preconnect" href="https://d3e54v103j8qbb.cloudfront.net" crossorigin>
+
+  {{/* ========== Canonical ========== */}}
+  <link rel="canonical" href="{{ .Permalink }}">
+
+  {{/* ========== Author ========== */}}
+  {{- $author := (or .Params.author .Site.Author.name) -}}
+  {{- if $author -}}<meta name="author" content="{{ $author }}">{{- end -}}
+  {{- if .Site.Params.authorURL -}}<link rel="author" href="{{ .Site.Params.authorURL }}">{{- end -}}
+
+  {{/* ========== Meta Description (smart fallback) ========== */}}
+  {{- $desc := cond (isset .Params "description") .Params.description (cond (gt (len (.Summary | plainify)) 0) (.Summary | plainify | truncate 160) .Site.Params.description) -}}
+  {{- if $desc -}}<meta name="description" content="{{ $desc }}">{{- end -}}
+
+  {{/* ========== OG / Twitter ========== */}}
+  {{- $isArticle := not .IsHome -}}
+  {{- $ogType := (cond $isArticle "article" "website") -}}
+  {{- $img := "" -}}
+  {{- if isset .Params "images" -}}
+    {{- $img = (index .Params.images 0 | absURL) -}}
+  {{- else if .Params.image -}}
+    {{- $img = (.Params.image | absURL) -}}
+  {{- else if .Site.Params.og_image -}}
+    {{- $img = (.Site.Params.og_image | absURL) -}}
+  {{- else -}}
+    {{- $img = (absURL "/images/showreel.png") -}}
+  {{- end -}}
+
+  <meta property="og:type" content="{{ $ogType }}">
+  <meta property="og:site_name" content="{{ .Site.Title }}">
+  <meta property="og:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} · {{ .Site.Title }}{{ end }}">
+  {{- if $desc -}}<meta property="og:description" content="{{ $desc }}">{{- end -}}
+  <meta property="og:url" content="{{ .Permalink }}">
+  {{- if $img -}}<meta property="og:image" content="{{ $img }}">{{- end -}}
+  <meta property="og:locale" content="{{ .Site.Language.LanguageCode }}">
+  {{- /* alternate locales for translations */ -}}
+  {{- range .AllTranslations }}
+    <meta property="og:locale:alternate" content="{{ .Site.Language.LanguageCode }}">
+  {{- end }}
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} · {{ .Site.Title }}{{ end }}">
+  {{- if $desc -}}<meta name="twitter:description" content="{{ $desc }}">{{- end -}}
+  {{- if $img -}}<meta name="twitter:image" content="{{ $img }}">{{- end -}}
+
+  {{/* ========== hreflang (bilingual) ========== */}}
+  <link rel="alternate" hreflang="{{ .Site.Language.Lang }}" href="{{ .Permalink }}">
+  {{- range .Translations }}
+    <link rel="alternate" hreflang="{{ .Language.Lang }}" href="{{ .Permalink }}">
+  {{- end }}
+  {{- /* Optional x-default pointing to the current page */ -}}
+  <link rel="alternate" hreflang="x-default" href="{{ .Permalink }}">
+
+  {{/* ========== Identity rel=me (optional, harmless for blog) ========== */}}
+  {{- with .Site.Params.relme }}
+    {{- range . }}
+      <link rel="me" href="{{ . }}">
+    {{- end }}
+  {{- end }}
+
+  {{/* ========== GA4 (same ID as main site) ========== */}}
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2C6ERNQ5SG"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-2C6ERNQ5SG');
+  </script>
+
+  {{/* ========== Typekit fonts ========== */}}
+  <script>
+    (function(d) {
+      var config = { kitId: 'hxp3tlv', scriptTimeout: 3000, async: true },
+          h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),
+          tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;
+      h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;
+      tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;
+        f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};
+      s.parentNode.insertBefore(tk,s)
+    })(document);
+  </script>
+
+  {{/* ========== JSON-LD ========== */}}
+  {{/* Website schema ONLY on the blog home to avoid duplication with main site */}}
+  {{ if .IsHome }}
+    <script type="application/ld+json">
+    {
+      "@context":"https://schema.org",
+      "@type":"WebSite",
+      "name":"{{ .Site.Title }}",
+      "url":"{{ .Site.BaseURL }}",
+      "inLanguage":"{{ .Site.Language.LanguageCode }}"
+    }
+    </script>
+  {{ end }}
+
+  {{/* BlogPosting on single posts */}}
+  {{ if and (eq .Kind "page") (not .IsHome) }}
+    <script type="application/ld+json">
+    {
+      "@context":"https://schema.org",
+      "@type":"BlogPosting",
+      "headline": {{ printf "%q" .Title }},
+      {{- if $desc }}"description": {{ printf "%q" $desc }},{{- end }}
+      "url": "{{ .Permalink }}",
+      "mainEntityOfPage": { "@type":"WebPage", "@id":"{{ .Permalink }}" },
+      {{- if $img }}"image": {{ printf "%q" $img }},{{- end }}
+      "datePublished": "{{ .PublishDate.UTC.Format "2006-01-02T15:04:05Z07:00" }}",
+      "dateModified": "{{ .Lastmod.UTC.Format "2006-01-02T15:04:05Z07:00" }}",
+      "author": {
+        "@type":"Person",
+        "name": {{ printf "%q" $author }}
+      },
+      "publisher": {
+        "@type":"Organization",
+        "name": "Class with Nico",
+        "logo": { "@type":"ImageObject", "url": "{{ (or .Site.Params.logo "/images/logo_simple.svg") | absURL }}" }
+      },
+      "inLanguage":"{{ .Site.Language.LanguageCode }}"
+    }
+    </script>
+  {{ end }}
+</head>

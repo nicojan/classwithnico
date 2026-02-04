@@ -1,0 +1,15 @@
+<nav class="lang-switch" aria-label="Language">
+  <ul>
+    <!-- Current page language -->
+    <li class="active">
+      <a href="{{ .RelPermalink }}">{{ .Site.Language.LanguageName }}</a>
+    </li>
+
+    <!-- Other translations -->
+    {{ range .Translations }}
+      <li>
+        <a href="{{ .RelPermalink }}">{{ .Language.LanguageName }}</a>
+      </li>
+    {{ end }}
+  </ul>
+</nav>
