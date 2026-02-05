@@ -45,11 +45,18 @@ body.blog a:hover { text-decoration: underline; }
 
 /* ----- Media ----- */
 body.blog img,
-body.blog video,
-body.blog iframe {
+body.blog video {
   display: block;
   max-width: 100%;
   height: auto;
+  border-radius: 8px;
+}
+
+/* Let embeds keep the height set by providers (e.g., Instagram) */
+body.blog iframe {
+  display: block;
+  max-width: 100%;
+  width: 100%;
   border-radius: 8px;
 }
 body.blog figure { margin: 1.25rem 0; }
