@@ -1,6 +1,6 @@
 ---
 title: "A Student’s Message"
-subtitle: "Why motivation matters more than perfection in language learning"
+subtitle: "why motivation matters more than perfection in language learning"
 date: 2025-09-18T09:00:00-07:00
 lastmod: 2025-09-18T12:00:00-07:00
 author: "Nico Jan"
