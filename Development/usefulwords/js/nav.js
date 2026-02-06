@@ -2758,20 +2758,27 @@ Webflow.define('links', module.exports = function ($, _) {
   function scroll() {
     var viewTop = $win.scrollTop();
     var viewHeight = $win.height();
+    var threshold = viewTop + viewHeight * 0.3;
+    var bestAnchor = null;
+    var bestTop = -Infinity;
 
-    // Check each anchor for a section in view
+    // Find the section whose top is closest to (but not past) the threshold
     _.each(anchors, function (anchor) {
-      var $link = anchor.link;
       var $section = anchor.sec;
+      if (!$section.is(':visible')) return;
       var top = $section.offset().top;
-      var height = $section.outerHeight();
-      var offset = viewHeight * 0.5;
-      var active = $section.is(':visible') && top + height - offset >= viewTop && top + offset <= viewTop + viewHeight;
-      if (anchor.active === active) {
-        return;
+      if (top <= threshold && top > bestTop) {
+        bestTop = top;
+        bestAnchor = anchor;
       }
+    });
+
+    // Activate only the best match, deactivate all others
+    _.each(anchors, function (anchor) {
+      var active = anchor === bestAnchor;
+      if (anchor.active === active) return;
       anchor.active = active;
-      setClass($link, linkCurrent, active);
+      setClass(anchor.link, linkCurrent, active);
     });
   }
 

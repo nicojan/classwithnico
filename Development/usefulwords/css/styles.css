@@ -1,45 +1,74 @@
+/* ============================================
+   Responsive visibility utilities
+   Breakpoints: main (>991), medium (992–768), small (768–480), tiny (≤479)
+   ============================================ */
+
+.hidden-main {
+  display: none !important;
+}
+
+@media screen and (max-width: 991px) {
+  .hidden-main {
+    display: inherit !important;
+  }
+  .hidden-medium {
+    display: none !important;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .hidden-main {
+    display: inherit !important;
+  }
+  .hidden-medium {
+    display: inherit !important;
+  }
+  .hidden-small {
+    display: none !important;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .hidden-main {
+    display: inherit !important;
+  }
+  .hidden-medium {
+    display: inherit !important;
+  }
+  .hidden-small {
+    display: inherit !important;
+  }
+  .hidden-tiny {
+    display: none !important;
+  }
+}
+
+/* ============================================
+   Base styles
+   ============================================ */
+
 .body {
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
   background-color: #fdfdfd;
   font-family: Sfcompactdisplay, sans-serif;
   color: #2f2f2f;
   font-size: 16px;
   font-weight: 400;
+  padding-bottom: 10%;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .nav_links {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   margin-top: 5px;
   margin-bottom: 5px;
   padding-top: 5px;
   padding-right: 10px;
   padding-bottom: 5px;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
   flex-direction: row;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
   justify-content: center;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
   align-items: center;
-  -webkit-box-flex: 0;
-  -webkit-flex: 0 auto;
-  -ms-flex: 0 auto;
   flex: 0 auto;
   color: #888;
   line-height: 16px;
@@ -47,6 +76,7 @@
   text-transform: none;
 }
 
+/* w--current: applied dynamically by scroll-spy (nav.js) */
 .nav_links.w--current {
   border-radius: 15px;
   color: #2f2f2f;
@@ -59,18 +89,8 @@
   margin-left: 30px;
   padding-top: 5px;
   padding-bottom: 5px;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
-  -webkit-box-pack: start;
-  -webkit-justify-content: flex-start;
-  -ms-flex-pack: start;
   justify-content: flex-start;
-  -webkit-box-align: start;
-  -webkit-align-items: flex-start;
-  -ms-flex-align: start;
   align-items: flex-start;
   font-size: 0.8em;
   line-height: 1em;
@@ -82,53 +102,23 @@
   top: 0px;
   bottom: 0px;
   z-index: 2;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   height: 44px;
   padding-right: 40px;
   padding-left: 40px;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
   flex-direction: row;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
   justify-content: center;
-  -webkit-flex-wrap: nowrap;
-  -ms-flex-wrap: nowrap;
   flex-wrap: nowrap;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
   align-items: center;
-  -webkit-align-content: space-between;
-  -ms-flex-line-pack: justify;
   align-content: space-between;
   background-color: #000;
   font-weight: 600;
 }
 
 .title {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
   justify-content: center;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
   align-items: center;
 }
 
@@ -141,24 +131,21 @@
   text-transform: uppercase;
 }
 
+.title_container {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 940px;
+}
+
 .section {
   padding-top: 20px;
   border-radius: 40px;
 }
 
 .item_title_container {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   margin-top: 20px;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
   justify-content: space-between;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
   align-items: center;
   border-bottom: 1px dotted #fff;
   color: #2f2f2f;
@@ -220,24 +207,11 @@
 }
 
 .link-block-2 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   width: 100%;
   height: 100%;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
   justify-content: center;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
   align-items: center;
 }
 
@@ -246,49 +220,21 @@
   left: 0px;
   top: 0px;
   bottom: 0px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   width: 22vw;
   height: 100vh;
   margin-left: 8vw;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
   justify-content: center;
-  -webkit-box-align: stretch;
-  -webkit-align-items: stretch;
-  -ms-flex-align: stretch;
   align-items: stretch;
 }
 
 .nav_desktop {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   width: 100%;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
-  -webkit-box-pack: start;
-  -webkit-justify-content: flex-start;
-  -ms-flex-pack: start;
   justify-content: flex-start;
-  -webkit-flex-wrap: nowrap;
-  -ms-flex-wrap: nowrap;
   flex-wrap: nowrap;
-  -webkit-box-align: start;
-  -webkit-align-items: flex-start;
-  -ms-flex-align: start;
   align-items: flex-start;
   font-weight: 300;
 }
@@ -303,26 +249,6 @@
 .nav_links_desktop {
   padding-top: 2px;
   padding-bottom: 2px;
-}
-
-.ad {
-  display: none;
-  margin-top: 50px;
-  margin-bottom: 50px;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.ad_desktop {
-  display: none;
-  width: 728px;
-  height: 90px;
 }
 
 .structures_category {
@@ -346,17 +272,10 @@
 }
 
 .category-button {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   margin-right: -20px;
   margin-left: -20px;
   padding: 20px 10px 20px 20px;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
   border-top-left-radius: 30px;
   border-top-right-radius: 30px;
@@ -391,6 +310,10 @@
   top: 60px;
 }
 
+/* ============================================
+   Tablet (max-width: 991px)
+   ============================================ */
+
 @media (max-width: 991px) {
   .body {
     font-size: 14px;
@@ -403,13 +326,13 @@
     margin-left: 10vw;
     padding-right: 0px;
     padding-left: 0px;
-    -webkit-box-pack: center;
-    -webkit-justify-content: center;
-    -ms-flex-pack: center;
     justify-content: center;
   }
   .title_text {
     font-size: 2em;
+  }
+  .title_container {
+    max-width: 728px;
   }
   .credit {
     line-height: 0.75em;
@@ -430,18 +353,11 @@
     position: static;
     padding-right: 0px;
     padding-left: 0px;
-    -webkit-box-pack: center;
-    -webkit-justify-content: center;
-    -ms-flex-pack: center;
     justify-content: center;
   }
   .page-container {
     width: 64vw;
     margin-right: 3vw;
-  }
-  .ad_tablet {
-    width: 300px;
-    height: 250px;
   }
   .category-name_english {
     font-size: 1.5em;
@@ -451,95 +367,62 @@
   }
 }
 
+/* ============================================
+   Small (max-width: 767px)
+   ============================================ */
+
 @media (max-width: 767px) {
   .body {
     padding-right: 0vw;
     padding-left: 0vw;
   }
   .nav_mobile_row {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
     display: flex;
     width: 100%;
     height: 100%;
-    -webkit-box-pack: center;
-    -webkit-justify-content: center;
-    -ms-flex-pack: center;
     justify-content: center;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-    -ms-flex-align: center;
     align-items: center;
   }
   .nav_mobile_link-container {
-    -webkit-box-pack: center;
-    -webkit-justify-content: center;
-    -ms-flex-pack: center;
+    width: 25%;
     justify-content: center;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-    -ms-flex-align: center;
     align-items: center;
   }
   .rotate {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
     display: flex;
     width: 100vw;
     height: 100vh;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
     flex-direction: column;
-    -webkit-box-pack: center;
-    -webkit-justify-content: center;
-    -ms-flex-pack: center;
     justify-content: center;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-    -ms-flex-align: center;
     align-items: center;
-    background-image: url('../images/icon_rotate.png');
+    background-image: url("../images/icon_rotate.png");
     background-position: 50% 50%;
     background-size: 20vw;
     background-repeat: no-repeat;
   }
 }
 
+/* ============================================
+   Mobile (max-width: 479px)
+   ============================================ */
+
 @media (max-width: 479px) {
   .body {
     font-family: Sfcompactdisplay, sans-serif;
   }
   .nav_links {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
     display: flex;
     width: 100%;
     height: 100%;
     padding: 15px 0px;
-    -webkit-box-pack: center;
-    -webkit-justify-content: center;
-    -ms-flex-pack: center;
     justify-content: center;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-    -ms-flex-align: center;
     align-items: center;
-    -webkit-transform: rotate(0deg);
-    -ms-transform: rotate(0deg);
     transform: rotate(0deg);
     color: #888;
     font-size: 1em;
     text-align: center;
   }
   .nav_links.w--current {
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-    -ms-flex-align: center;
     align-items: center;
     border-bottom-left-radius: 0px;
     border-bottom-right-radius: 0px;
@@ -550,10 +433,13 @@
   .nav_links.w--current:focus {
     background-color: #2f2f2f;
   }
+  .logo-container {
+    display: none;
+  }
   .nav_mobile {
     position: fixed;
     left: 0px;
-    top: auto;
+    top: calc(100vh - 440px - 30px - 15vh);
     bottom: auto;
     width: 440px;
     height: 30px;
@@ -561,81 +447,37 @@
     margin-left: 0vw;
     padding-right: 0px;
     padding-left: 0px;
-    -webkit-flex-wrap: nowrap;
-    -ms-flex-wrap: nowrap;
     flex-wrap: nowrap;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-    -ms-flex-align: center;
     align-items: center;
     background-color: transparent;
-    -webkit-transform: rotate(90deg) translate(0px, 0px);
-    -ms-transform: rotate(90deg) translate(0px, 0px);
     transform: rotate(90deg) translate(0px, 0px);
-    -webkit-transform-origin: 0% 100%;
-    -ms-transform-origin: 0% 100%;
     transform-origin: 0% 100%;
     font-weight: 400;
   }
   .nav_mobile_row {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
     display: flex;
     width: 100%;
     height: 100%;
-    -webkit-box-pack: center;
-    -webkit-justify-content: center;
-    -ms-flex-pack: center;
     justify-content: center;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-    -ms-flex-align: center;
     align-items: center;
     font-size: 0.8em;
   }
   .nav_mobile_link-container {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
     display: flex;
     height: 100%;
     padding-right: 0px;
     padding-left: 0px;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
     flex-direction: column;
-    -webkit-box-pack: center;
-    -webkit-justify-content: center;
-    -ms-flex-pack: center;
     justify-content: center;
-    -webkit-box-align: stretch;
-    -webkit-align-items: stretch;
-    -ms-flex-align: stretch;
     align-items: stretch;
   }
   .title {
     position: relative;
     z-index: 2;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
     display: flex;
     padding-top: 50px;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: row;
-    -ms-flex-direction: row;
     flex-direction: row;
-    -webkit-box-pack: start;
-    -webkit-justify-content: flex-start;
-    -ms-flex-pack: start;
     justify-content: flex-start;
-    -webkit-box-align: end;
-    -webkit-align-items: flex-end;
-    -ms-flex-align: end;
     align-items: flex-end;
     text-decoration: none;
   }
@@ -643,27 +485,16 @@
     text-align: left;
   }
   .title_container {
-    -webkit-box-flex: 1;
-    -webkit-flex: 1;
-    -ms-flex: 1;
     flex: 1;
+    max-width: none;
     text-transform: uppercase;
   }
   .item_title_container {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
     display: flex;
     margin-top: 10px;
     margin-right: -10px;
     padding: 5px 10px;
-    -webkit-box-pack: justify;
-    -webkit-justify-content: space-between;
-    -ms-flex-pack: justify;
     justify-content: space-between;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-    -ms-flex-align: center;
     align-items: center;
     border-bottom: 1px dotted #fff;
     font-size: 1.2em;
@@ -714,13 +545,7 @@
     bottom: 30px;
     width: 40px;
     height: 40px;
-    -webkit-box-pack: center;
-    -webkit-justify-content: center;
-    -ms-flex-pack: center;
     justify-content: center;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-    -ms-flex-align: center;
     align-items: center;
     border-radius: 100%;
     background-color: #2f2f2f;
@@ -730,19 +555,10 @@
     height: 60%;
   }
   .link-block-2 {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
     display: flex;
     width: 100%;
     height: 100%;
-    -webkit-box-pack: center;
-    -webkit-justify-content: center;
-    -ms-flex-pack: center;
     justify-content: center;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-    -ms-flex-align: center;
     align-items: center;
   }
   .nav_desktop {
@@ -756,19 +572,10 @@
     margin-left: 0vw;
     padding-right: 0px;
     padding-left: 0px;
-    -webkit-flex-wrap: nowrap;
-    -ms-flex-wrap: nowrap;
     flex-wrap: nowrap;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-    -ms-flex-align: center;
     align-items: center;
     background-color: transparent;
-    -webkit-transform: rotate(90deg);
-    -ms-transform: rotate(90deg);
     transform: rotate(90deg);
-    -webkit-transform-origin: 0% 100%;
-    -ms-transform-origin: 0% 100%;
     transform-origin: 0% 100%;
   }
   .page-container {
@@ -779,29 +586,8 @@
     padding-left: 50px;
   }
   .sidebar_container {
-    -webkit-box-flex: 1;
-    -webkit-flex: 1;
-    -ms-flex: 1;
     flex: 1;
     text-transform: uppercase;
-  }
-  .ad {
-    display: none;
-    margin-top: 25px;
-    margin-right: -10px;
-    margin-bottom: 25px;
-    -webkit-box-pack: center;
-    -webkit-justify-content: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-    -ms-flex-align: center;
-    align-items: center;
-  }
-  .ad_mobile {
-    width: 320px;
-    height: 50px;
   }
   .structures_category {
     margin-right: -10px;
@@ -820,6 +606,25 @@
   .category-content {
     margin-left: -20px;
     padding-left: 10px;
+    display: none;
+  }
+  .category-content.is-open {
+    display: block;
+  }
+  .category-button {
+    position: relative;
+  }
+  .category-button::after {
+    content: "+";
+    font-size: 1.5em;
+    font-weight: 300;
+    color: #888;
+    position: absolute;
+    right: 20px;
+    align-self: center;
+  }
+  .category-button.is-open::after {
+    content: "\2212";
   }
   .section-title {
     margin-right: -10px;
@@ -834,33 +639,37 @@
   }
 }
 
+/* ============================================
+   Fonts
+   ============================================ */
+
 @font-face {
-  font-family: 'Sfcompactdisplay';
-  src: url('../fonts/SFCompactDisplay-Regular.otf') format('opentype');
+  font-family: "Sfcompactdisplay";
+  src: url("../fonts/SFCompactDisplay-Regular.otf") format("opentype");
   font-weight: 400;
   font-style: normal;
 }
 @font-face {
-  font-family: 'Sfcompactdisplay';
-  src: url('../fonts/SFCompactDisplay-Light.otf') format('opentype');
+  font-family: "Sfcompactdisplay";
+  src: url("../fonts/SFCompactDisplay-Light.otf") format("opentype");
   font-weight: 300;
   font-style: normal;
 }
 @font-face {
-  font-family: 'Sfcompactdisplay';
-  src: url('../fonts/SFCompactDisplay-Medium.otf') format('opentype');
+  font-family: "Sfcompactdisplay";
+  src: url("../fonts/SFCompactDisplay-Medium.otf") format("opentype");
   font-weight: 500;
   font-style: normal;
 }
 @font-face {
-  font-family: 'Sfcompactdisplay';
-  src: url('../fonts/SFCompactDisplay-Bold.otf') format('opentype');
+  font-family: "Sfcompactdisplay";
+  src: url("../fonts/SFCompactDisplay-Bold.otf") format("opentype");
   font-weight: 700;
   font-style: normal;
 }
 @font-face {
-  font-family: 'Sfcompactdisplay';
-  src: url('../fonts/SFCompactDisplay-Semibold.otf') format('opentype');
+  font-family: "Sfcompactdisplay";
+  src: url("../fonts/SFCompactDisplay-Semibold.otf") format("opentype");
   font-weight: 600;
   font-style: normal;
 }
