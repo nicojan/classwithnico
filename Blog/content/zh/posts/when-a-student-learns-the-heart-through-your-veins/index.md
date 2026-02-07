@@ -13,7 +13,8 @@ translationKey: "when-a-student-learns-the-heart-through-your-veins"
 
 # For SEO / social sharing
 description: "一篇關於調整教材以提升學生投入度與知識留存的反思，取材自一次真實的課輔經歷與教育資料探勘研究"
-images: ["/blog/img/shared/a-student's-message.png"]
+images:
+  ["/blog/img/shared/when-a-student-learns-the-heart-through-your-veins.png"]
 ---
 
 Harry 的生物期中考需要幫忙。他告訴我，他很難記住心臟的解剖構造，也搞不清楚血液如何在循環系統中流動。我平常教的是英文。文學。寫作。但 Harry 開口問了，而我一直都很喜歡生物，所以我想，應該可以想點辦法。

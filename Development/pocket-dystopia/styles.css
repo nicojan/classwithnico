@@ -109,7 +109,11 @@ h1 {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at center, rgba(0, 240, 255, 0.3) 0%, transparent 70%);
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 240, 255, 0.3) 0%,
+    transparent 70%
+  );
   border-radius: 4px;
   opacity: 0;
   animation: crt-glow-bloom 800ms ease-out both;
@@ -123,8 +127,17 @@ h1 {
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(90deg, transparent 5%, rgba(0, 240, 255, 0.8) 30%, rgba(255, 255, 255, 0.9) 50%, rgba(0, 240, 255, 0.8) 70%, transparent 95%);
-  box-shadow: 0 0 20px 6px rgba(0, 240, 255, 0.5), 0 0 60px 10px rgba(0, 240, 255, 0.2);
+  background: linear-gradient(
+    90deg,
+    transparent 5%,
+    rgba(0, 240, 255, 0.8) 30%,
+    rgba(255, 255, 255, 0.9) 50%,
+    rgba(0, 240, 255, 0.8) 70%,
+    transparent 95%
+  );
+  box-shadow:
+    0 0 20px 6px rgba(0, 240, 255, 0.5),
+    0 0 60px 10px rgba(0, 240, 255, 0.2);
   top: 50%;
   transform: translateY(-50%);
   opacity: 0;
@@ -139,19 +152,19 @@ h1 {
 
 /* Die roll animation for subsequent rolls */
 .activated .container.die-roll-x {
-  animation: die-roll-x 650ms cubic-bezier(0.4, 0.0, 0.2, 1) both;
+  animation: die-roll-x 650ms cubic-bezier(0.4, 0, 0.2, 1) both;
 }
 .activated .container.die-roll-neg-x {
-  animation: die-roll-neg-x 650ms cubic-bezier(0.4, 0.0, 0.2, 1) both;
+  animation: die-roll-neg-x 650ms cubic-bezier(0.4, 0, 0.2, 1) both;
 }
 .activated .container.die-roll-y {
-  animation: die-roll-y 650ms cubic-bezier(0.4, 0.0, 0.2, 1) both;
+  animation: die-roll-y 650ms cubic-bezier(0.4, 0, 0.2, 1) both;
 }
 .activated .container.die-roll-neg-y {
-  animation: die-roll-neg-y 650ms cubic-bezier(0.4, 0.0, 0.2, 1) both;
+  animation: die-roll-neg-y 650ms cubic-bezier(0.4, 0, 0.2, 1) both;
 }
 .activated .container.die-roll-diagonal {
-  animation: die-roll-diagonal 650ms cubic-bezier(0.4, 0.0, 0.2, 1) both;
+  animation: die-roll-diagonal 650ms cubic-bezier(0.4, 0, 0.2, 1) both;
 }
 
 .activated .container.die-roll-x .result-area,
@@ -226,8 +239,11 @@ h1 {
   cursor: pointer;
   padding: 0;
   touch-action: manipulation;
-  animation: die-hover 3s ease-in-out infinite, die-glow-pulse 4s ease-in-out infinite;
-  filter: drop-shadow(0 0 8px rgba(0, 240, 255, 0.4)) drop-shadow(0 0 20px rgba(0, 240, 255, 0.2));
+  animation:
+    die-hover 3s ease-in-out infinite,
+    die-glow-pulse 4s ease-in-out infinite;
+  filter: drop-shadow(0 0 8px rgba(0, 240, 255, 0.4))
+    drop-shadow(0 0 20px rgba(0, 240, 255, 0.2));
 }
 
 /* When rolling, override idle animations */
@@ -237,7 +253,8 @@ h1 {
 }
 
 .die-btn:active:not(.rolling) {
-  filter: drop-shadow(0 0 16px rgba(0, 240, 255, 0.8)) drop-shadow(0 0 40px rgba(0, 240, 255, 0.4));
+  filter: drop-shadow(0 0 16px rgba(0, 240, 255, 0.8))
+    drop-shadow(0 0 40px rgba(0, 240, 255, 0.4));
   transform: translateX(-50%) scale(0.9);
   animation-play-state: paused;
 }
@@ -251,7 +268,12 @@ h1 {
   transform: translate(-50%, -50%);
   width: 130%;
   height: 130%;
-  background: radial-gradient(circle, rgba(13, 15, 20, 0.75) 30%, rgba(13, 15, 20, 0.3) 65%, transparent 100%);
+  background: radial-gradient(
+    circle,
+    rgba(13, 15, 20, 0.75) 30%,
+    rgba(13, 15, 20, 0.3) 65%,
+    transparent 100%
+  );
   border-radius: 50%;
   pointer-events: none;
   z-index: -1;
@@ -266,17 +288,26 @@ h1 {
 
 /* Gentle floating bob */
 @keyframes die-hover {
-  0%, 100% { transform: translateX(-50%) translateY(0); }
-  50% { transform: translateX(-50%) translateY(-8px); }
+  0%,
+  100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    transform: translateX(-50%) translateY(-8px);
+  }
 }
 
 /* Eerie glow pulse */
 @keyframes die-glow-pulse {
-  0%, 100% {
-    filter: drop-shadow(0 0 8px rgba(0, 240, 255, 0.4)) drop-shadow(0 0 20px rgba(0, 240, 255, 0.15));
+  0%,
+  100% {
+    filter: drop-shadow(0 0 8px rgba(0, 240, 255, 0.4))
+      drop-shadow(0 0 20px rgba(0, 240, 255, 0.15));
   }
   50% {
-    filter: drop-shadow(0 0 14px rgba(0, 240, 255, 0.7)) drop-shadow(0 0 35px rgba(0, 240, 255, 0.3)) drop-shadow(0 0 60px rgba(0, 240, 255, 0.1));
+    filter: drop-shadow(0 0 14px rgba(0, 240, 255, 0.7))
+      drop-shadow(0 0 35px rgba(0, 240, 255, 0.3))
+      drop-shadow(0 0 60px rgba(0, 240, 255, 0.1));
   }
 }
 
@@ -469,56 +500,156 @@ li::before {
 
 /* Die roll keyframes - each direction is a 90-degree tumble */
 @keyframes die-roll-x {
-  0% { transform: perspective(1200px) rotateX(0deg) scale(1); opacity: 1; }
-  25% { transform: perspective(1200px) rotateX(45deg) scale(0.9); opacity: 0.5; }
-  50% { transform: perspective(1200px) rotateX(90deg) scale(0.85); opacity: 0; }
-  51% { transform: perspective(1200px) rotateX(-90deg) scale(0.85); opacity: 0; }
-  75% { transform: perspective(1200px) rotateX(-45deg) scale(0.9); opacity: 0.5; }
-  100% { transform: perspective(1200px) rotateX(0deg) scale(1); opacity: 1; }
+  0% {
+    transform: perspective(1200px) rotateX(0deg) scale(1);
+    opacity: 1;
+  }
+  25% {
+    transform: perspective(1200px) rotateX(45deg) scale(0.9);
+    opacity: 0.5;
+  }
+  50% {
+    transform: perspective(1200px) rotateX(90deg) scale(0.85);
+    opacity: 0;
+  }
+  51% {
+    transform: perspective(1200px) rotateX(-90deg) scale(0.85);
+    opacity: 0;
+  }
+  75% {
+    transform: perspective(1200px) rotateX(-45deg) scale(0.9);
+    opacity: 0.5;
+  }
+  100% {
+    transform: perspective(1200px) rotateX(0deg) scale(1);
+    opacity: 1;
+  }
 }
 
 @keyframes die-roll-neg-x {
-  0% { transform: perspective(1200px) rotateX(0deg) scale(1); opacity: 1; }
-  25% { transform: perspective(1200px) rotateX(-45deg) scale(0.9); opacity: 0.5; }
-  50% { transform: perspective(1200px) rotateX(-90deg) scale(0.85); opacity: 0; }
-  51% { transform: perspective(1200px) rotateX(90deg) scale(0.85); opacity: 0; }
-  75% { transform: perspective(1200px) rotateX(45deg) scale(0.9); opacity: 0.5; }
-  100% { transform: perspective(1200px) rotateX(0deg) scale(1); opacity: 1; }
+  0% {
+    transform: perspective(1200px) rotateX(0deg) scale(1);
+    opacity: 1;
+  }
+  25% {
+    transform: perspective(1200px) rotateX(-45deg) scale(0.9);
+    opacity: 0.5;
+  }
+  50% {
+    transform: perspective(1200px) rotateX(-90deg) scale(0.85);
+    opacity: 0;
+  }
+  51% {
+    transform: perspective(1200px) rotateX(90deg) scale(0.85);
+    opacity: 0;
+  }
+  75% {
+    transform: perspective(1200px) rotateX(45deg) scale(0.9);
+    opacity: 0.5;
+  }
+  100% {
+    transform: perspective(1200px) rotateX(0deg) scale(1);
+    opacity: 1;
+  }
 }
 
 @keyframes die-roll-y {
-  0% { transform: perspective(1200px) rotateY(0deg) scale(1); opacity: 1; }
-  25% { transform: perspective(1200px) rotateY(45deg) scale(0.9); opacity: 0.5; }
-  50% { transform: perspective(1200px) rotateY(90deg) scale(0.85); opacity: 0; }
-  51% { transform: perspective(1200px) rotateY(-90deg) scale(0.85); opacity: 0; }
-  75% { transform: perspective(1200px) rotateY(-45deg) scale(0.9); opacity: 0.5; }
-  100% { transform: perspective(1200px) rotateY(0deg) scale(1); opacity: 1; }
+  0% {
+    transform: perspective(1200px) rotateY(0deg) scale(1);
+    opacity: 1;
+  }
+  25% {
+    transform: perspective(1200px) rotateY(45deg) scale(0.9);
+    opacity: 0.5;
+  }
+  50% {
+    transform: perspective(1200px) rotateY(90deg) scale(0.85);
+    opacity: 0;
+  }
+  51% {
+    transform: perspective(1200px) rotateY(-90deg) scale(0.85);
+    opacity: 0;
+  }
+  75% {
+    transform: perspective(1200px) rotateY(-45deg) scale(0.9);
+    opacity: 0.5;
+  }
+  100% {
+    transform: perspective(1200px) rotateY(0deg) scale(1);
+    opacity: 1;
+  }
 }
 
 @keyframes die-roll-neg-y {
-  0% { transform: perspective(1200px) rotateY(0deg) scale(1); opacity: 1; }
-  25% { transform: perspective(1200px) rotateY(-45deg) scale(0.9); opacity: 0.5; }
-  50% { transform: perspective(1200px) rotateY(-90deg) scale(0.85); opacity: 0; }
-  51% { transform: perspective(1200px) rotateY(90deg) scale(0.85); opacity: 0; }
-  75% { transform: perspective(1200px) rotateY(45deg) scale(0.9); opacity: 0.5; }
-  100% { transform: perspective(1200px) rotateY(0deg) scale(1); opacity: 1; }
+  0% {
+    transform: perspective(1200px) rotateY(0deg) scale(1);
+    opacity: 1;
+  }
+  25% {
+    transform: perspective(1200px) rotateY(-45deg) scale(0.9);
+    opacity: 0.5;
+  }
+  50% {
+    transform: perspective(1200px) rotateY(-90deg) scale(0.85);
+    opacity: 0;
+  }
+  51% {
+    transform: perspective(1200px) rotateY(90deg) scale(0.85);
+    opacity: 0;
+  }
+  75% {
+    transform: perspective(1200px) rotateY(45deg) scale(0.9);
+    opacity: 0.5;
+  }
+  100% {
+    transform: perspective(1200px) rotateY(0deg) scale(1);
+    opacity: 1;
+  }
 }
 
 @keyframes die-roll-diagonal {
-  0% { transform: perspective(1200px) rotate3d(1, 1, 0, 0deg) scale(1); opacity: 1; }
-  25% { transform: perspective(1200px) rotate3d(1, 1, 0, 45deg) scale(0.9); opacity: 0.5; }
-  50% { transform: perspective(1200px) rotate3d(1, 1, 0, 90deg) scale(0.85); opacity: 0; }
-  51% { transform: perspective(1200px) rotate3d(1, 1, 0, -90deg) scale(0.85); opacity: 0; }
-  75% { transform: perspective(1200px) rotate3d(1, 1, 0, -45deg) scale(0.9); opacity: 0.5; }
-  100% { transform: perspective(1200px) rotate3d(1, 1, 0, 0deg) scale(1); opacity: 1; }
+  0% {
+    transform: perspective(1200px) rotate3d(1, 1, 0, 0deg) scale(1);
+    opacity: 1;
+  }
+  25% {
+    transform: perspective(1200px) rotate3d(1, 1, 0, 45deg) scale(0.9);
+    opacity: 0.5;
+  }
+  50% {
+    transform: perspective(1200px) rotate3d(1, 1, 0, 90deg) scale(0.85);
+    opacity: 0;
+  }
+  51% {
+    transform: perspective(1200px) rotate3d(1, 1, 0, -90deg) scale(0.85);
+    opacity: 0;
+  }
+  75% {
+    transform: perspective(1200px) rotate3d(1, 1, 0, -45deg) scale(0.9);
+    opacity: 0.5;
+  }
+  100% {
+    transform: perspective(1200px) rotate3d(1, 1, 0, 0deg) scale(1);
+    opacity: 1;
+  }
 }
 
 @keyframes die-content-flash {
-  0% { opacity: 1; }
-  25% { opacity: 0.3; }
-  50% { opacity: 0; }
-  75% { opacity: 0.3; }
-  100% { opacity: 1; }
+  0% {
+    opacity: 1;
+  }
+  25% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0;
+  }
+  75% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 /* Mobile specific adjustments */

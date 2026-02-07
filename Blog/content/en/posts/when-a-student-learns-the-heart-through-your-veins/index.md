@@ -20,7 +20,8 @@ translationKey: "when-a-student-learns-the-heart-through-your-veins"
 
 # For SEO / social sharing
 description: "a reflection on adapting lesson material to increase student engagement and retention, drawing from a real tutoring moment and educational data mining research"
-images: ["/blog/img/shared/a-student's-message.png"]
+images:
+  ["/blog/img/shared/when-a-student-learns-the-heart-through-your-veins.png"]
 ---
 
 Harry needed help with his biology midterm. He told me he was struggling to memorize the anatomy of the heart and trace how blood moves through the circulatory system. Normally, I teach English. Literature. Writing. But Harry asked, and I always loved Biology, so I figured we could work something out.

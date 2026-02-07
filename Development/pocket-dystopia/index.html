@@ -22,7 +22,10 @@
       property="og:image"
       content="https://raw.githubusercontent.com/nicojan/classwithnico/refs/heads/main/Development/pocket-dystopia/og-image-v1.png"
     />
-    <meta property="og:url" content="https://classwith.nicojan.com/pocket-dystopia/" />
+    <meta
+      property="og:url"
+      content="https://classwith.nicojan.com/pocket-dystopia/"
+    />
     <meta property="twitter:card" content="summary_large_image" />
     <title>Pocket Dystopia</title>
     <link rel="stylesheet" href="styles.css" />
@@ -38,22 +41,84 @@
     </div>
 
     <!-- Floating d20 die button -->
-    <button class="die-btn" onclick="generateNightmare()" aria-label="Roll the die">
-      <svg class="die-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <button
+      class="die-btn"
+      onclick="generateNightmare()"
+      aria-label="Roll the die"
+    >
+      <svg
+        class="die-icon"
+        viewBox="0 0 100 100"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
         <!-- d20 icosahedron shape -->
-        <polygon points="50,5 95,35 82,88 18,88 5,35" stroke="currentColor" stroke-width="2" fill="none"/>
+        <polygon
+          points="50,5 95,35 82,88 18,88 5,35"
+          stroke="currentColor"
+          stroke-width="2"
+          fill="none"
+        />
         <!-- Inner triangulation lines -->
-        <line x1="50" y1="5" x2="18" y2="88" stroke="currentColor" stroke-width="1.2"/>
-        <line x1="50" y1="5" x2="82" y2="88" stroke="currentColor" stroke-width="1.2"/>
-        <line x1="5" y1="35" x2="82" y2="88" stroke="currentColor" stroke-width="1.2"/>
-        <line x1="95" y1="35" x2="18" y2="88" stroke="currentColor" stroke-width="1.2"/>
-        <line x1="5" y1="35" x2="95" y2="35" stroke="currentColor" stroke-width="1.2"/>
+        <line
+          x1="50"
+          y1="5"
+          x2="18"
+          y2="88"
+          stroke="currentColor"
+          stroke-width="1.2"
+        />
+        <line
+          x1="50"
+          y1="5"
+          x2="82"
+          y2="88"
+          stroke="currentColor"
+          stroke-width="1.2"
+        />
+        <line
+          x1="5"
+          y1="35"
+          x2="82"
+          y2="88"
+          stroke="currentColor"
+          stroke-width="1.2"
+        />
+        <line
+          x1="95"
+          y1="35"
+          x2="18"
+          y2="88"
+          stroke="currentColor"
+          stroke-width="1.2"
+        />
+        <line
+          x1="5"
+          y1="35"
+          x2="95"
+          y2="35"
+          stroke="currentColor"
+          stroke-width="1.2"
+        />
         <!-- Center number -->
-        <text id="die-num" x="50" y="58" text-anchor="middle" fill="currentColor" font-size="22" font-family="VT323, monospace">20</text>
+        <text
+          id="die-num"
+          x="50"
+          y="58"
+          text-anchor="middle"
+          fill="currentColor"
+          font-size="22"
+          font-family="VT323, monospace"
+        >
+          20
+        </text>
       </svg>
     </button>
 
-    <footer class="site-footer">built with ♥ by <a href="https://nicojan.com" target="_blank" rel="noopener">Nico Jan</a></footer>
+    <footer class="site-footer">
+      built with ♥ by
+      <a href="https://nicojan.com" target="_blank" rel="noopener">Nico Jan</a>
+    </footer>
 
     <script>
       // DATA SETS - The Satirical Collection
@@ -155,8 +220,8 @@
       const traumas = [
         "parents taken by men in masks",
         "house blew up (character building!)",
-        "boarding school for sad children",
-        "starved a little bit",
+        "boarding school for 'sad' children",
+        "skipped breakfast this morning",
         "exiled for having blue hair",
         "bubble boy/girl upbringing",
         "accidental snitch",
@@ -171,12 +236,11 @@
         "top 10 Anime Betrayals",
         "vending machine out of water",
         "road closed (construction forever)",
-        "the bomb timer is ticking",
-        "mum calls via hologram to guilt trip",
-        "the laser gun jammed",
-        "main character gets betrayed",
+        "The bomb timer is ticking.",
+        "Mum calls via hologram to guilt trip.",
+        "The laser gun jammed.",
         "existential dread",
-        "the rabbit chewed through the cable!",
+        "The rabbit chewed through the cable!",
       ];
 
       function getItems(array, count) {
