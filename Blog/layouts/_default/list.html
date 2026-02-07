@@ -1,27 +1,29 @@
 {{ define "main" }}
-<section>
+<section class="post-list">
   <h1>{{ .Title }}</h1>
-  {{ range .Paginator.Pages }}
-  <article class="card">
-    <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
-    {{ $firstPara := index (findRE "(?s)<p>.*?</p>" .Content 1) 0 }}
-    {{ with $firstPara }}
-      {{ . | safeHTML }}
-    {{ end }}
-    {{ with .Params.images }}
-      {{ if ge (len .) 1 }}
-        {{ $img := index . 0 }}
-        <img
-          src="{{ $img }}"
-          alt="{{ $.Title }}"
-          class="post-image"
-          style="height: 200px; width: 100%; object-fit: cover; object-position: center;"
-        />
+  <div class="post-grid">
+    {{ range .Paginator.Pages }}
+    <article class="card">
+      <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+      {{ $firstPara := index (findRE "(?s)<p>.*?</p>" .Content 1) 0 }}
+      {{ with $firstPara }}
+        {{ . | safeHTML }}
       {{ end }}
+      {{ with .Params.images }}
+        {{ if ge (len .) 1 }}
+          {{ $img := index . 0 }}
+          <img
+            src="{{ $img }}"
+            alt="{{ $.Title }}"
+            class="post-image"
+          />
+        {{ end }}
+      {{ end }}
+      <p class="muted">{{ .Date.Format "Jan 2, 2006" }}</p>
+      <p><a href="{{ .RelPermalink }}">Read more →</a></p>
+    </article>
     {{ end }}
-    <p class="muted">{{ .Date.Format "Jan 2, 2006" }}</p>
-    <p><a href="{{ .RelPermalink }}">Read more →</a></p>
-  </article>
-  {{ end }} {{ template "_internal/pagination.html" . }}
+  </div>
+  {{ template "_internal/pagination.html" . }}
 </section>
 {{ end }}
