@@ -86,8 +86,21 @@ h1 {
   flex-direction: column;
   align-items: center;
   padding-top: env(safe-area-inset-top, 10px);
-  background: var(--bg-color);
   transition: padding 0.4s ease;
+  /* Extend background well above the element to cover notch/status bar */
+  background: var(--bg-color);
+}
+
+/* Cover the notch / status bar area above the header */
+.hero::before {
+  content: "";
+  position: absolute;
+  top: calc(-1 * env(safe-area-inset-top, 0px));
+  left: 0;
+  right: 0;
+  height: env(safe-area-inset-top, 0px);
+  background: var(--bg-color);
+  pointer-events: none;
 }
 
 /* Gradient fade below the fixed header */
@@ -280,9 +293,9 @@ h1 {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(13, 15, 20, 0.85) 20%, rgba(13, 15, 20, 0.4) 50%, transparent 70%);
+  width: 130%;
+  height: 130%;
+  background: radial-gradient(circle, rgba(13, 15, 20, 0.75) 30%, rgba(13, 15, 20, 0.3) 65%, transparent 100%);
   border-radius: 50%;
   pointer-events: none;
   z-index: -1;
