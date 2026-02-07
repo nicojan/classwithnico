@@ -17,17 +17,29 @@
     <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   </head>
   <body class="intro">
-    <div class="hero">
+    <header class="hero">
       <h1 class="flicker">POCKET DYSTOPIA</h1>
-    </div>
-
-    <div class="btn-container">
-      <button onclick="generateNightmare()">[ ROLL THE DIE ]</button>
-    </div>
+    </header>
 
     <div class="container">
       <div id="output" class="result-area"></div>
     </div>
+
+    <!-- Floating d20 die button -->
+    <button class="die-btn" onclick="generateNightmare()" aria-label="Roll the die">
+      <svg class="die-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- d20 icosahedron shape -->
+        <polygon points="50,5 95,35 82,88 18,88 5,35" stroke="currentColor" stroke-width="2" fill="none"/>
+        <!-- Inner triangulation lines -->
+        <line x1="50" y1="5" x2="18" y2="88" stroke="currentColor" stroke-width="1.2"/>
+        <line x1="50" y1="5" x2="82" y2="88" stroke="currentColor" stroke-width="1.2"/>
+        <line x1="5" y1="35" x2="82" y2="88" stroke="currentColor" stroke-width="1.2"/>
+        <line x1="95" y1="35" x2="18" y2="88" stroke="currentColor" stroke-width="1.2"/>
+        <line x1="5" y1="35" x2="95" y2="35" stroke="currentColor" stroke-width="1.2"/>
+        <!-- Center number -->
+        <text x="50" y="58" text-anchor="middle" fill="currentColor" font-size="22" font-family="VT323, monospace">20</text>
+      </svg>
+    </button>
 
     <script>
       // DATA SETS - The Satirical Collection
@@ -158,12 +170,18 @@
         return shuffled.slice(0, count);
       }
 
-      function generateNightmare() {
-        const out = document.getElementById("output");
-        document.body.classList.remove("intro");
-        document.body.classList.add("activated");
+      let hasRolled = false;
+      let lastRollClass = "";
 
-        // Generate Data
+      const dieRollClasses = [
+        "die-roll-x",
+        "die-roll-neg-x",
+        "die-roll-y",
+        "die-roll-neg-y",
+        "die-roll-diagonal",
+      ];
+
+      function buildHTML() {
         const pChars = getItems(protagTraits, 3);
         const pWeak = getItems(protagWeakness, 1);
         const aChars = getItems(antagonist, 3);
@@ -174,8 +192,7 @@
         const trau = getItems(traumas, 1);
         const obs = getItems(obstacles, 2);
 
-        // Construct HTML
-        let html = `
+        return `
                 <div class="section">
                     <div class="label">>> THE HERO</div>
                     <ul>
@@ -215,11 +232,68 @@
                     </ul>
                 </div>
             `;
+      }
 
-        out.innerHTML = html;
-        out.style.display = "block";
+      let isRolling = false;
 
-        // Smooth scroll to results (setTimeout ensures rendering finishes)
+      function generateNightmare() {
+        if (isRolling) return; // prevent spam clicks during animation
+        isRolling = true;
+
+        const out = document.getElementById("output");
+        const container = document.querySelector(".container");
+        const dieBtn = document.querySelector(".die-btn");
+
+        document.body.classList.remove("intro");
+        document.body.classList.add("activated");
+
+        // Animate the die: roll off right, come back from left
+        dieBtn.classList.remove("rolling");
+        void dieBtn.offsetWidth; // force reflow
+        dieBtn.classList.add("rolling");
+
+        // Remove rolling class when animation ends
+        dieBtn.addEventListener(
+          "animationend",
+          () => {
+            dieBtn.classList.remove("rolling");
+            isRolling = false;
+          },
+          { once: true },
+        );
+
+        if (!hasRolled) {
+          // First roll: CRT boot-up
+          out.innerHTML = buildHTML();
+          out.style.display = "block";
+          container.classList.add("crt-boot");
+          hasRolled = true;
+        } else {
+          // Subsequent rolls: die tumble with random direction
+          // Remove previous animation class
+          container.classList.remove("crt-boot");
+          if (lastRollClass) container.classList.remove(lastRollClass);
+
+          // Pick a random direction, avoid repeating the same one
+          let rollClass;
+          do {
+            rollClass =
+              dieRollClasses[Math.floor(Math.random() * dieRollClasses.length)];
+          } while (rollClass === lastRollClass && dieRollClasses.length > 1);
+          lastRollClass = rollClass;
+
+          // Force reflow so animation restarts
+          void container.offsetWidth;
+          container.classList.add(rollClass);
+
+          // Swap content at midpoint of the animation (when face is hidden)
+          const html = buildHTML();
+          setTimeout(() => {
+            out.innerHTML = html;
+          }, 325);
+        }
+
+        // Smooth scroll to results
         setTimeout(() => {
           window.scrollTo({
             top: 0,
