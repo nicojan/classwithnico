@@ -4,6 +4,9 @@
   {{ range .Paginator.Pages }}
   <article class="card">
     <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+    {{ with .Summary }}
+    <p>{{ . }}</p>
+    {{ end }}
     {{ with .Params.images }}
       {{ if ge (len .) 1 }}
         {{ $img := index . 0 }}
@@ -11,13 +14,11 @@
           src="{{ $img }}"
           alt="{{ $.Title }}"
           class="post-image"
+          style="height: 200px; width: 100%; object-fit: cover; object-position: center;"
         />
       {{ end }}
     {{ end }}
     <p class="muted">{{ .Date.Format "Jan 2, 2006" }}</p>
-    {{ with .Summary }}
-    <p>{{ . }}</p>
-    {{ end }}
     <p><a href="{{ .RelPermalink }}">Read more →</a></p>
   </article>
   {{ end }} {{ template "_internal/pagination.html" . }}
