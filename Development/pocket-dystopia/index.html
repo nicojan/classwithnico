@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta
       name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
     />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta
@@ -37,9 +37,11 @@
         <line x1="95" y1="35" x2="18" y2="88" stroke="currentColor" stroke-width="1.2"/>
         <line x1="5" y1="35" x2="95" y2="35" stroke="currentColor" stroke-width="1.2"/>
         <!-- Center number -->
-        <text x="50" y="58" text-anchor="middle" fill="currentColor" font-size="22" font-family="VT323, monospace">20</text>
+        <text id="die-num" x="50" y="58" text-anchor="middle" fill="currentColor" font-size="22" font-family="VT323, monospace">20</text>
       </svg>
     </button>
+
+    <footer class="site-footer">built with ♥ by <a href="https://nicojan.com" target="_blank" rel="noopener">Nico Jan</a></footer>
 
     <script>
       // DATA SETS - The Satirical Collection
@@ -234,6 +236,45 @@
             `;
       }
 
+      // Magical number cycling on the die
+      const dieNumEl = document.getElementById("die-num");
+      let idleCycleId = null;
+
+      // Slow idle cycle — number changes every 2s for an eerie, alive feel
+      function startIdleCycle() {
+        stopIdleCycle();
+        idleCycleId = setInterval(() => {
+          dieNumEl.textContent = Math.floor(Math.random() * 20) + 1;
+        }, 600);
+      }
+
+      function stopIdleCycle() {
+        if (idleCycleId) {
+          clearInterval(idleCycleId);
+          idleCycleId = null;
+        }
+      }
+
+      // Fast spin cycle during roll — numbers blur past
+      function rollNumberCycle(duration) {
+        stopIdleCycle();
+        const end = Date.now() + duration;
+        function tick() {
+          dieNumEl.textContent = Math.floor(Math.random() * 20) + 1;
+          if (Date.now() < end) {
+            requestAnimationFrame(tick);
+          } else {
+            // Land on a final number, then resume idle
+            dieNumEl.textContent = Math.floor(Math.random() * 20) + 1;
+            startIdleCycle();
+          }
+        }
+        requestAnimationFrame(tick);
+      }
+
+      // Start the idle cycle on load
+      startIdleCycle();
+
       let isRolling = false;
 
       function generateNightmare() {
@@ -251,6 +292,9 @@
         dieBtn.classList.remove("rolling");
         void dieBtn.offsetWidth; // force reflow
         dieBtn.classList.add("rolling");
+
+        // Fast number cycling for the duration of the roll animation
+        rollNumberCycle(900);
 
         // Remove rolling class when animation ends
         dieBtn.addEventListener(
