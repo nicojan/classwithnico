@@ -4,8 +4,9 @@
   {{ range .Paginator.Pages }}
   <article class="card">
     <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
-    {{ with .Summary }}
-    <p>{{ . }}</p>
+    {{ $firstPara := index (findRE "(?s)<p>.*?</p>" .Content 1) 0 }}
+    {{ with $firstPara }}
+      {{ . | safeHTML }}
     {{ end }}
     {{ with .Params.images }}
       {{ if ge (len .) 1 }}
