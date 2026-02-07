@@ -4,11 +4,16 @@
   {{ range .Paginator.Pages }}
   <article class="card">
     <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
-    {{ with (first 1 .Params.images) }}<img
-      src="{{ index . 0 }}"
-      alt="{{ $.Title }}"
-      class="post-image"
-    />{{ end }}
+    {{ with .Params.images }}
+      {{ if ge (len .) 1 }}
+        {{ $img := index . 0 }}
+        <img
+          src="{{ $img }}"
+          alt="{{ $.Title }}"
+          class="post-image"
+        />
+      {{ end }}
+    {{ end }}
     <p class="muted">{{ .Date.Format "Jan 2, 2006" }}</p>
     {{ with .Summary }}
     <p>{{ . }}</p>
