@@ -45,6 +45,11 @@
 {{ end }}
 <link rel="stylesheet" href="{{ $outputCss.RelPermalink }}" />
 
+{{/* Main site navbar + blog CSS — full absolute URL so canonifyURLs doesn't prepend /blog/ */}}
+{{- $siteRoot := "https://classwith.nicojan.com/" -}}
+<link rel="stylesheet" href="{{ $siteRoot }}css/style.css" />
+<link rel="stylesheet" href="{{ $siteRoot }}css/blog.css" />
+
 {{ if or site.Params.backgroundImage site.Params.backgroundImageDark }}
 <style>
 {{ if site.Params.backgroundImage }}
@@ -59,6 +64,14 @@ html.dark #dream-global-bg {
 {{ end }}
 </style>
 {{ end }}
+
+{{/* ========== Force light mode before Alpine.js initializes ========== */}}
+<script>
+  localStorage.setItem('hugo-theme-dream-is-dark', 'n');
+  document.documentElement.classList.remove('dark');
+  document.documentElement.classList.add('light');
+  document.documentElement.setAttribute('data-theme', '{{ site.Params.lightTheme }}');
+</script>
 
 {{/* ========== Custom: Typekit fonts ========== */}}
 <script>

@@ -1,323 +1,113 @@
-/* ----- Layout & rhythm ----- */
-body.blog {
-  --maxw: 70ch;                         /* comfortable reading width */
-  --gutter: clamp(1rem, 3vw, 2rem);     /* horizontal padding */
-  --muted: #6b7280;                     /* secondary text */
-  --card-border: rgba(0,0,0,.08);
-  --card-shadow: 0 6px 20px rgba(0,0,0,.06);
-  --radius: 10px;
-}
-body.blog #content {
-  max-width: var(--maxw);
-  margin: 0 auto;
-  padding: 2.25rem var(--gutter) 4rem;
-  line-height: 1.7;
-  color: #222;                          /* match site text tone */
+/*
+ * blog.css — Overrides for the Hugo Dream theme blog.
+ *
+ * The blog body does NOT have class="blog", so we target the Dream
+ * theme's own structure: .flip-container, .dream-grid,
+ * #dream-single-post-main, etc.
+ *
+ * This file also neutralizes clashing globals from style.css
+ * (headings, .container, etc.) that break the Dream layout.
+ */
+
+/* ===================================================================
+   1. Push content below the fixed navbar
+   =================================================================== */
+/* The navbar is position:fixed, height:10vh / max-height:100px.
+   Use padding-top so the content starts below it. */
+.flip-container {
+  padding-top: 110px;
 }
 
-/* ----- Typography (inherits site serif; adjust scales) ----- */
-body.blog h1,
-body.blog h2,
-body.blog h3,
-body.blog h4,
-body.blog h5,
-body.blog h6 {
-  font-size: 1rem;
-  font-weight: 600;
-  line-height: 1.5;
-  margin-top: 1rem;
-  margin-bottom: 0.25rem;
-}
-body.blog p { margin: 0 0 1rem; }
-body.blog .muted { 
-  color: var(--muted); 
-  font-size: 0.8rem;
-}
+/* ===================================================================
+   2. Undo style.css globals that break the Dream theme
+   =================================================================== */
 
-/* Links — mirror site behavior (subtle hover) */
-body.blog a {
-  color: #222;
-  text-decoration: none;
-  text-underline-offset: 2px;
-  transition: background 0.2s, color 0.2s, text-decoration-color 0.2s;
-}
-body.blog a:hover { text-decoration: underline; }
-
-/* ----- Media ----- */
-body.blog img,
-body.blog video {
-  display: block;
-  max-width: 100%;
+/* style.css sets .container { height:55px; overflow:hidden } at ≤1000px,
+   which clips the Dream theme's .container (its main content wrapper).
+   Restore it here with higher specificity. */
+.flip-container .container {
   height: auto;
-  border-radius: 8px;
+  overflow: visible;
+  width: auto;
+  position: static;
+  background: transparent;
+  box-shadow: none;
+  margin: 0;
 }
 
-/* Let embeds keep the height set by providers (e.g., Instagram) */
-body.blog iframe {
-  display: block;
-  max-width: 100%;
-  width: 100%;
-  border-radius: 8px;
-}
-body.blog figure { margin: 1.25rem 0; }
-body.blog figcaption { color: var(--muted); font-size: .95rem; text-align: center; margin-top: .5rem; }
-
-/* ----- Lists page (cards) ----- */
-body.blog .cards { display: grid; gap: 1.25rem; }
-@media (min-width: 760px) {
-  body.blog .cards { grid-template-columns: repeat(2, 1fr); }
-}
-body.blog .card {
-  border: 1px solid var(--card-border);
-  border-radius: var(--radius);
-  padding: 1.5rem 1.5rem;
-  background: #fff;
-  transition: transform .15s ease, box-shadow .15s ease;
-  display: flex;
-  flex-direction: column;
-  max-height: 600px;           /* new: cap height */
-  overflow: hidden;            /* prevent content spilling */
-}
-
-body.blog .card figure {
-  aspect-ratio: 16/9;          /* lock to 16:9 */
-  flex: 0 0 auto;              /* don’t stretch */
-  margin: 1rem 0;
-  overflow: hidden;
-}
-
-body.blog .card {
-  position: relative;          /* required for ::after */
-}
-
-body.blog .card figure img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* Only figures inside cards — does NOT affect post content figures */
-body.blog .card > figure {
-  /* Let the figure absorb remaining room in the 600px card */
-  flex: 1 1 auto;
-  min-height: 0;      /* allows flex child to shrink if needed */
-  margin: 0;          /* cards typically want tight media blocks */
-  position: relative; /* for absolute image fill below */
-  display: block;
-  overflow: hidden;   /* hide any overflow from contained media */
-}
-
-/* Maintain a 16:9 box for the media */
-body.blog .card > figure::before {
-  content: "";
-  display: block;
-  width: 100%;
-  padding-top: 56.25%; /* 16:9 aspect ratio */
-}
-
-/* Optional: clamp excerpt inside cards */
-body.blog .card .muted,
-body.blog .card p {
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 4;     /* adjust lines as you like */
-  -webkit-box-orient: vertical;
-}
-
-/* Make the image/video fill the 16:9 box cleanly */
-body.blog .card > figure img,
-body.blog .card > figure video {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;  /* crop to fill the box without distortion */
-  display: block;
-}
-
-/* Ensure all non-figure content takes its natural height */
-body.blog .card > *:not(figure) {
-  flex: 0 0 auto;
-  position: relative;
-  z-index: 1;
-}
-
-body.blog .card:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--card-shadow);
-}
-
-body.blog .card h2 { margin: 0 0 .25rem; }
-body.blog .card .muted { font-size: .95rem; margin-bottom: .5rem; }
-
-/* Apply gradient only to the first paragraph after the figure inside a card */
-body.blog .card > figure + p {
-  position: relative;
-  max-height: 6.5em; /* roughly 4 lines, adjust as needed */
-  overflow: hidden;
-}
-
-body.blog .card > figure + p::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 3em; /* height of fade area */
-  background: linear-gradient(to bottom, rgba(255,255,255,25%), #fff 100%);
-}
-/* ----- Single post header/meta ----- */
-body.blog .post header { margin-bottom: 1.25rem; }
-body.blog .post .subtitle { color: var(--muted); margin-top: .25rem; }
-body.blog .post .tags {
-  display: flex;
-  gap: .5rem;
-  list-style: none;
-  padding: 0;
-  margin: .5rem 0 0;
-  flex-wrap: wrap;
-}
-body.blog .post .tags li {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 30px;
-  border-style: solid;
-  border-width: 1px;
-  border-radius: 980px;
-  border-color: rgba(0,0,0,.14);
+/* style.css sets .container .header with fixed positioning, 55px height,
+   and overflow:hidden at ≤1000px — undo for Dream's content area */
+.flip-container .container .header {
+  position: static;
+  height: auto;
+  width: auto;
+  overflow: visible;
   background: transparent;
 }
-/* Make the whole pill clickable and match Apple button feel */
-body.blog .post .tags li a {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 7px 15px;
-  border-radius: 980px; /* ensure focus ring matches pill */
-  line-height: 1;
-  text-decoration: none;
-  color: inherit;
-  transition: background .2s ease, border-color .2s ease, color .2s ease, box-shadow .2s ease;
-}
-body.blog .post .tags li:hover {
-  background: rgba(0,0,0,.06);
-  border-color: rgba(0,0,0,.18);
-}
-body.blog .post .tags li:active {
-  background: rgba(0,0,0,.08);
-  border-color: rgba(0,0,0,.22);
-}
-/* Optional: when a tag page is active, you may add an .active class to the li */
-body.blog .post .tags li.active,
-body.blog .post .tags li.active a {
-  background: #000;
-  color: #fff;
-  border-color: #000;
+
+/* style.css flattens all headings to font-size:1rem.
+   Let the Dream theme's Tailwind typography handle headings. */
+.flip-container h1,
+.flip-container h2,
+.flip-container h3,
+.flip-container h4,
+.flip-container h5,
+.flip-container h6 {
+  font-size: revert;
+  font-weight: revert;
+  line-height: revert;
+  margin-top: revert;
+  margin-bottom: revert;
 }
 
-/* ----- Language switcher (Apple-style pill buttons) ----- */
-body.blog .lang-switch ul {
-  display: flex;
-  gap: .5rem;
-  list-style: none;
-  padding: 0;
-  margin: .75rem 0 1.25rem;
-  flex-wrap: wrap;
-}
-body.blog .lang-switch a {
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 30px;
-  padding: 7px 15px;
-  border-style: solid;
-  border-width: 1px;
-  border-radius: 980px;
-  border-color: rgba(0,0,0,.14);
-  background: transparent;
-  line-height: 1;
-  transition: background .2s ease, border-color .2s ease, color .2s ease, box-shadow .2s ease;
-}
-body.blog .lang-switch a:hover {
-  background: rgba(0,0,0,.06);
-  border-color: rgba(0,0,0,.18);
-}
-body.blog .lang-switch a:active {
-  background: rgba(0,0,0,.08);
-  border-color: rgba(0,0,0,.22);
-}
-body.blog .lang-switch .active a {
-  background: #000;
-  color: #fff;
-  border-color: #000;
-  text-decoration: none;
+/* The .prose class (Tailwind Typography) sets its own heading scales.
+   Make sure style.css doesn't flatten them. */
+.prose h1 { font-size: revert; }
+.prose h2 { font-size: revert; }
+.prose h3 { font-size: revert; }
+.prose h4 { font-size: revert; }
+
+/* style.css sets a global serif font-family on html,body and :lang() selectors.
+   Let the Dream theme's own font stack apply inside the blog. */
+.flip-container {
+  font-family: revert;
 }
 
-/* ----- Pagination ----- */
-body.blog .pagination { margin-top: 1.5rem; display:flex; gap:.75rem; justify-content:center; }
-body.blog .pagination a { border: 1px solid var(--card-border); border-radius: 6px; padding: .35rem .7rem; }
-body.blog .pagination a:hover { background: rgba(0,0,0,.06); }
-
-/* ----- Footer links (back-to-blog and go-home) ----- */
-body.blog footer {
-  padding: 1.5rem var(--gutter);
-  font-size: 0.8rem;
+/* style.css forces all images to display:block which can break
+   inline icons and card imagery in the Dream theme. */
+.flip-container img {
+  display: revert;
 }
 
-body.blog #back-to-blog,
-body.blog #go-home {
-  margin: 0.5rem 0;
+/* style.css sets global link styles; let Dream/Tailwind handle links */
+.flip-container a {
+  color: revert;
+  text-decoration: revert;
+  transition: revert;
 }
 
-body.blog #go-home {
-  margin-left: 2rem;   /* base indent */
-}
-
-body.blog #back-to-blog {
-  margin-left: 6rem; /* further indent to indicate hierarchy */
-}
-
-body.blog #back-to-blog a,
-body.blog #go-home a {
-  color: #222;
-  text-decoration: none;
-  font-weight: 500;
-}
-
-body.blog #back-to-blog a:hover,
-body.blog #go-home a:hover {
-  text-decoration: underline;
-}
-
-/* ----- Responsive polish to match site’s portrait tweaks ----- */
-@media (orientation: portrait) {
-  body.blog #content { padding: 1.75rem var(--gutter) 3.25rem; }
-  body.blog .cards { gap: 1rem; }
-}
+/* ===================================================================
+   3. Mobile: undo style.css .container clamp (higher specificity)
+   =================================================================== */
 @media (max-width: 1000px) {
-  /* Hide desktop navbar, show mobile (site CSS already does this; mirror for safety) */
-  .navbar { display: none !important; }
-  .mobile-navbar { display: block !important; }
-
-  body.blog #site-navbar,
-  body.blog .mobile-navbar,
-  body.blog .mobile-navbar .header {
-    margin-top: 0 !important;
-    padding-top: 0 !important;
+  /* The mobile-navbar .container is fine (that IS the site navbar).
+     But the Dream theme's .container must not be clamped. */
+  .flip-container .container {
+    height: auto !important;
+    overflow: visible !important;
+    position: static !important;
+    width: auto !important;
   }
 
-  body.blog { 
-    margin-top: 0 !important;     /* kill any global margin-top from style.css */
-  }
-  
-  /* Comfortable reading width and spacing on phones */
-  body.blog #content {
-    --maxw: 68ch; 
-    padding-top: 1rem; 
+  .flip-container .container .header {
+    position: static !important;
+    height: auto !important;
+    overflow: visible !important;
+    width: auto !important;
   }
 
-  /* Card layout becomes single column */
-  body.blog .cards { grid-template-columns: 1fr; }
+  /* Reduce top padding on mobile since the mobile navbar is shorter */
+  .flip-container {
+    padding-top: 65px;
+  }
 }
