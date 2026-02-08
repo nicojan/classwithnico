@@ -17,7 +17,7 @@
 
 .post-grid .card {
   width: 100%;
-  max-width: 450px;
+  max-width: 360px;
 }
 
 .tag-filter {
@@ -29,8 +29,8 @@
 
 .tag-pill {
   border: 1px solid #1a1a1a;
-  border-radius: 999px;
-  padding: 6px 14px;
+  border-radius: 9999px;
+  padding: 7px 16px;
   background: #fff;
   color: #1a1a1a;
   font-size: 0.9rem;
@@ -38,8 +38,9 @@
 }
 
 .tag-pill.is-active {
-  background: #1a1a1a;
+  background: #000;
   color: #fff;
+  border-color: #000;
 }
 
 .post-image {
