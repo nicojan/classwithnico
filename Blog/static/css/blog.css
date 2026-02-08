@@ -1,23 +1,41 @@
-.post-list {
+:root {
+  --content-max: 1200px;
+}
+
+#content {
+  max-width: var(--content-max);
+  margin: 0 auto;
   padding: 0 20px 40px;
+}
+
+.navbar-content {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
 .post-grid {
   display: grid;
   gap: 32px;
-  justify-items: center;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  justify-content: center;
+  grid-template-columns: repeat(1, minmax(0, 540px));
+}
+
+@media (min-width: 700px) {
+  .post-grid {
+    grid-template-columns: repeat(2, minmax(0, 540px));
+  }
 }
 
 @media (min-width: 1100px) {
   .post-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 540px));
   }
 }
 
 .post-grid .card {
   width: 100%;
-  max-width: 360px;
+  max-width: 540px;
 }
 
 .tag-filter {
