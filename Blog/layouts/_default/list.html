@@ -1,9 +1,19 @@
 {{ define "main" }}
 <section class="post-list">
   <h1>{{ .Title }}</h1>
+  {{ $tags := .Site.Taxonomies.tags.ByCount }}
+  {{ if gt (len $tags) 0 }}
+  <div class="tag-filter" data-tag-filter>
+    <button class="tag-pill is-active" type="button" data-tag="all" aria-pressed="true">All</button>
+    {{ range $tags }}
+      {{ $tagName := .Page.Title }}
+      <button class="tag-pill" type="button" data-tag="{{ $tagName | urlize }}" aria-pressed="false">{{ $tagName }}</button>
+    {{ end }}
+  </div>
+  {{ end }}
   <div class="post-grid">
     {{ range .Paginator.Pages }}
-    <article class="card">
+    <article class="card" data-tags="{{ range $i, $t := .Params.tags }}{{ if $i }},{{ end }}{{ $t | urlize }}{{ end }}">
       <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
       {{ $firstPara := index (findRE "(?s)<p>.*?</p>" .Content 1) 0 }}
       {{ with $firstPara }}
@@ -26,4 +36,36 @@
   </div>
   {{ template "_internal/pagination.html" . }}
 </section>
+<script>
+  (function() {
+    var container = document.querySelector("[data-tag-filter]");
+    if (!container) return;
+    var pills = container.querySelectorAll("[data-tag]");
+    var cards = document.querySelectorAll(".post-grid .card");
+
+    function setActive(tag) {
+      pills.forEach(function(pill) {
+        var isActive = pill.getAttribute("data-tag") === tag;
+        pill.classList.toggle("is-active", isActive);
+        pill.setAttribute("aria-pressed", isActive ? "true" : "false");
+      });
+
+      cards.forEach(function(card) {
+        if (tag === "all") {
+          card.style.display = "";
+          return;
+        }
+        var tags = (card.getAttribute("data-tags") || "").split(",");
+        var show = tags.indexOf(tag) !== -1;
+        card.style.display = show ? "" : "none";
+      });
+    }
+
+    pills.forEach(function(pill) {
+      pill.addEventListener("click", function() {
+        setActive(pill.getAttribute("data-tag"));
+      });
+    });
+  })();
+</script>
 {{ end }}
