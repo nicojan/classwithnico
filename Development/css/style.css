@@ -7,14 +7,7 @@ body {
   font-size: 18px;
   line-height: 1.4;
   font-family:
-    "Cormorant Garamond",
-    ui-serif,
-    "Georgia",
-    "source-serif-4-variable",
-    "Times New Roman" serif,
-    "source-han-serif-tw-subset",
-    "PingFang TC",
-    "Songti TC";
+    "Cormorant Garamond", ui-serif, "Times New Roman", "Georgia", serif;
   font-weight: 400;
   background: #fff;
   color: #000;
@@ -23,23 +16,7 @@ body {
 body.blog {
   margin-top: 80px; /* adjust to your navbar height */
 }
-/* Language-aware font stacks */
-:lang(zh),
-:lang(zh-Hant),
-:lang(zh-TW),
-:lang(zh-HK) {
-  font-family: "source-han-serif-tw-subset", "PingFang TC", "Songti TC", serif;
-  /* Optional: improve CJK punctuation spacing */
-  font-kerning: normal;
-  font-variant-east-asian: proportional-width;
-}
-/* Optional: keep English using a clean Latin stack explicitly when lang="en" is present */
-:lang(en),
-:lang(en-CA) {
-  font-family:
-    "Cormorant Garamond", ui-serif, "Georgia", "Times New Roman",
-    "Source Serif 4", serif;
-}
+
 body {
   min-height: 100vh;
 }
