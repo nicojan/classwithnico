@@ -4,13 +4,12 @@ languageCode = "en"
 defaultContentLanguage = "en"
 defaultContentLanguageInSubdir = false
 timeZone = "America/Vancouver"
+publishDir = "../Development/blog"
 
 # Hugo Theme Dream
 [module]
   [[module.imports]]
     path = "github.com/g1eny0ung/hugo-theme-dream"
-
-publishDir = "../Development/blog"
 
 [permalinks]
 posts = "/:year/:month/:slug/"
