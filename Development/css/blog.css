@@ -79,10 +79,19 @@
 .prose h3 { font-size: revert; }
 .prose h4 { font-size: revert; }
 
+/* Match blog post text colour to the main site (#000) */
+.flip-container .prose {
+  --tw-prose-body: #000;
+  --tw-prose-headings: #000;
+  --tw-prose-bold: #000;
+  --tw-prose-quotes: #000;
+}
+
 /* style.css sets a global serif font-family on html,body and :lang() selectors.
    Let the Dream theme's own font stack apply inside the blog. */
 .flip-container {
   font-family: revert;
+  color: #000;
 }
 
 /* style.css forces all images to display:block which can break
