@@ -105,7 +105,52 @@
 }
 
 /* ===================================================================
-   4. Mobile: undo style.css .container clamp (higher specificity)
+   4. Language switcher
+   =================================================================== */
+.lang-switch {
+  position: fixed;
+  top: calc(10vh + 8px);
+  right: 1.5rem;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08);
+  font-size: 0.78rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  line-height: 1;
+}
+
+.lang-active {
+  font-weight: 700;
+  color: #000;
+}
+
+.lang-sep {
+  color: #ccc;
+  user-select: none;
+}
+
+.lang-link,
+.lang-link:link,
+.lang-link:visited {
+  color: #888;
+  text-decoration: none;
+  font-weight: 400;
+  transition: color 0.15s;
+}
+
+.lang-link:hover {
+  color: #000;
+}
+
+/* ===================================================================
+   5. Mobile: undo style.css .container clamp (higher specificity)
    =================================================================== */
 @media (max-width: 1000px) {
   /* The mobile-navbar .container is fine (that IS the site navbar).
@@ -127,5 +172,11 @@
   /* Reduce top padding on mobile since the mobile navbar is shorter */
   .flip-container {
     padding-top: 65px;
+  }
+
+  /* Language switcher: adjust for shorter mobile navbar */
+  .lang-switch {
+    top: 60px;
+    right: 1rem;
   }
 }
