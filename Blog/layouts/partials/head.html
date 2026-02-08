@@ -1,36 +1,108 @@
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+{{/* Override dream's head.html to add Typekit fonts and JSON-LD */}}
 
-  {{/* ========== Title ========== */}}
-  <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} · {{ .Site.Title }}{{ end }}</title>
+{{/* ========== Dream's default head content ========== */}}
+{{ with site.Params.favicon }}
+  {{ if hasPrefix . "<link" }}
+    {{ . | safeHTML }}
+  {{ else }}
+    <link href="{{ . | relURL }}" rel="icon" type="image/x-icon" />
+  {{ end }}
+{{ end }}
 
-  {{/* ========== Styles ========== */}}
-  <link rel="stylesheet" href="/css/style.css">
-  <link rel="stylesheet" href="/css/blog.css">
+<link rel="canonical" href="{{ .Permalink }}" />
 
+{{ if eq .Type "posts" }}
+<meta name="author" content="{{ if isset .Params "author" }}{{ .Params.author }}{{ else }}{{ site.Params.author }}{{ end }}" />
+<meta name="description" content="{{ (or .Description .Summary) | plainify }}" />
+{{- $keywords := slice }}
+{{- with .Keywords }}
+  {{- $keywords = . }}
+{{- else }}
+  {{- range .GetTerms "tags" }}
+    {{- $keywords = $keywords | append .Title }}
+  {{- else }}
+    {{- range $taxonomy, $_ := site.Taxonomies }}
+      {{- range $.GetTerms $taxonomy }}
+        {{- $keywords = $keywords | append .Title }}
+      {{- end }}
+    {{- end }}
+  {{- end }}
+{{- end }}
+<meta name="keywords" content="{{ delimit $keywords `,` }}">
+{{ else }}
+<meta name="author" content="{{ site.Params.author }}" />
+<meta name="description" content="{{ site.Params.description | plainify }}" />
+{{ end }}
 
-  <link href="/images/favicon.png" rel="shortcut icon" type="image/x-icon">
+{{ hugo.Generator }}
 
-  {{/* ========== Preconnects ========== */}}
-  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
-  <link rel="preconnect" href="https://d3e54v103j8qbb.cloudfront.net" crossorigin>
+{{ template "_internal/opengraph.html" . }}
+{{ template "_internal/twitter_cards.html" . }}
 
-  {{/* ========== Canonical ========== */}}
-  <link rel="canonical" href="{{ .Permalink }}">
+{{ $outputCss := resources.Get "css/output.css" }}
+{{ if hugo.IsProduction }}
+  {{ $outputCss = $outputCss | minify }}
+{{ end }}
+<link rel="stylesheet" href="{{ $outputCss.RelPermalink }}" />
 
-  {{/* ========== Author ========== */}}
-  {{- $author := (or .Params.author .Site.Author.name) -}}
-  {{- if $author -}}<meta name="author" content="{{ $author }}">{{- end -}}
-  {{- if .Site.Params.authorURL -}}<link rel="author" href="{{ .Site.Params.authorURL }}">{{- end -}}
+{{ if or site.Params.backgroundImage site.Params.backgroundImageDark }}
+<style>
+{{ if site.Params.backgroundImage }}
+#dream-global-bg {
+  background-image: url({{ site.Params.backgroundImage | relURL }});
+}
+{{ end }}
+{{ if site.Params.backgroundImageDark }}
+html.dark #dream-global-bg {
+  background-image: url({{ site.Params.backgroundImageDark | relURL }});
+}
+{{ end }}
+</style>
+{{ end }}
 
-  {{/* ========== Meta Description (smart fallback) ========== */}}
-  {{- $desc := cond (isset .Params "description") .Params.description (cond (gt (len (.Summary | plainify)) 0) (.Summary | plainify | truncate 160) .Site.Params.description) -}}
-  {{- if $desc -}}<meta name="description" content="{{ $desc }}">{{- end -}}
+{{/* ========== Custom: Typekit fonts ========== */}}
+<script>
+  (function(d) {
+    var config = { kitId: 'hxp3tlv', scriptTimeout: 3000, async: true },
+        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),
+        tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;
+    h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;
+    tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;
+      f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};
+    s.parentNode.insertBefore(tk,s)
+  })(document);
+</script>
 
-  {{/* ========== OG / Twitter ========== */}}
-  {{- $isArticle := not .IsHome -}}
-  {{- $ogType := (cond $isArticle "article" "website") -}}
+{{/* ========== Custom: hreflang ========== */}}
+<link rel="alternate" hreflang="{{ .Site.Language.Lang }}" href="{{ .Permalink }}">
+{{- range .Translations }}
+  <link rel="alternate" hreflang="{{ .Language.Lang }}" href="{{ .Permalink }}">
+{{- end }}
+<link rel="alternate" hreflang="x-default" href="{{ .Permalink }}">
+
+{{/* ========== Custom: rel=me identity links ========== */}}
+{{- with .Site.Params.relme }}
+  {{- range . }}
+    <link rel="me" href="{{ . }}">
+  {{- end }}
+{{- end }}
+
+{{/* ========== Custom: JSON-LD ========== */}}
+{{ if .IsHome }}
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebSite",
+    "name":"{{ .Site.Title }}",
+    "url":"{{ .Site.BaseURL }}",
+    "inLanguage":"{{ .Site.Language.LanguageCode }}"
+  }
+  </script>
+{{ end }}
+
+{{ if and (eq .Kind "page") (not .IsHome) }}
+  {{- $author := (or .Params.author .Site.Params.author) -}}
+  {{- $desc := (or .Description (.Summary | plainify | truncate 160)) -}}
   {{- $img := "" -}}
   {{- if isset .Params "images" -}}
     {{- $img = (index .Params.images 0 | absURL) -}}
@@ -38,102 +110,28 @@
     {{- $img = (.Params.image | absURL) -}}
   {{- else if .Site.Params.og_image -}}
     {{- $img = (.Site.Params.og_image | absURL) -}}
-  {{- else -}}
-    {{- $img = (absURL "/images/showreel.png") -}}
   {{- end -}}
-
-  <meta property="og:type" content="{{ $ogType }}">
-  <meta property="og:site_name" content="{{ .Site.Title }}">
-  <meta property="og:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} · {{ .Site.Title }}{{ end }}">
-  {{- if $desc -}}<meta property="og:description" content="{{ $desc }}">{{- end -}}
-  <meta property="og:url" content="{{ .Permalink }}">
-  {{- if $img -}}<meta property="og:image" content="{{ $img }}">{{- end -}}
-  <meta property="og:locale" content="{{ .Site.Language.LanguageCode }}">
-  {{- /* alternate locales for translations */ -}}
-  {{- range .AllTranslations }}
-    <meta property="og:locale:alternate" content="{{ .Site.Language.LanguageCode }}">
-  {{- end }}
-
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} · {{ .Site.Title }}{{ end }}">
-  {{- if $desc -}}<meta name="twitter:description" content="{{ $desc }}">{{- end -}}
-  {{- if $img -}}<meta name="twitter:image" content="{{ $img }}">{{- end -}}
-
-  {{/* ========== hreflang (bilingual) ========== */}}
-  <link rel="alternate" hreflang="{{ .Site.Language.Lang }}" href="{{ .Permalink }}">
-  {{- range .Translations }}
-    <link rel="alternate" hreflang="{{ .Language.Lang }}" href="{{ .Permalink }}">
-  {{- end }}
-  {{- /* Optional x-default pointing to the current page */ -}}
-  <link rel="alternate" hreflang="x-default" href="{{ .Permalink }}">
-
-  {{/* ========== Identity rel=me (optional, harmless for blog) ========== */}}
-  {{- with .Site.Params.relme }}
-    {{- range . }}
-      <link rel="me" href="{{ . }}">
-    {{- end }}
-  {{- end }}
-
-  {{/* ========== GA4 (same ID as main site) ========== */}}
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2C6ERNQ5SG"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-2C6ERNQ5SG');
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BlogPosting",
+    "headline": {{ printf "%q" .Title }},
+    {{- if $desc }}"description": {{ printf "%q" $desc }},{{- end }}
+    "url": "{{ .Permalink }}",
+    "mainEntityOfPage": { "@type":"WebPage", "@id":"{{ .Permalink }}" },
+    {{- if $img }}"image": {{ printf "%q" $img }},{{- end }}
+    "datePublished": "{{ .PublishDate.UTC.Format "2006-01-02T15:04:05Z07:00" }}",
+    "dateModified": "{{ .Lastmod.UTC.Format "2006-01-02T15:04:05Z07:00" }}",
+    "author": {
+      "@type":"Person",
+      "name": {{ printf "%q" $author }}
+    },
+    "publisher": {
+      "@type":"Organization",
+      "name": "Class with Nico",
+      "logo": { "@type":"ImageObject", "url": "{{ (or .Site.Params.logo "/images/logo_simple.svg") | absURL }}" }
+    },
+    "inLanguage":"{{ .Site.Language.LanguageCode }}"
+  }
   </script>
-
-  {{/* ========== Typekit fonts ========== */}}
-  <script>
-    (function(d) {
-      var config = { kitId: 'hxp3tlv', scriptTimeout: 3000, async: true },
-          h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),
-          tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;
-      h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;
-      tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;
-        f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};
-      s.parentNode.insertBefore(tk,s)
-    })(document);
-  </script>
-
-  {{/* ========== JSON-LD ========== */}}
-  {{/* Website schema ONLY on the blog home to avoid duplication with main site */}}
-  {{ if .IsHome }}
-    <script type="application/ld+json">
-    {
-      "@context":"https://schema.org",
-      "@type":"WebSite",
-      "name":"{{ .Site.Title }}",
-      "url":"{{ .Site.BaseURL }}",
-      "inLanguage":"{{ .Site.Language.LanguageCode }}"
-    }
-    </script>
-  {{ end }}
-
-  {{/* BlogPosting on single posts */}}
-  {{ if and (eq .Kind "page") (not .IsHome) }}
-    <script type="application/ld+json">
-    {
-      "@context":"https://schema.org",
-      "@type":"BlogPosting",
-      "headline": {{ printf "%q" .Title }},
-      {{- if $desc }}"description": {{ printf "%q" $desc }},{{- end }}
-      "url": "{{ .Permalink }}",
-      "mainEntityOfPage": { "@type":"WebPage", "@id":"{{ .Permalink }}" },
-      {{- if $img }}"image": {{ printf "%q" $img }},{{- end }}
-      "datePublished": "{{ .PublishDate.UTC.Format "2006-01-02T15:04:05Z07:00" }}",
-      "dateModified": "{{ .Lastmod.UTC.Format "2006-01-02T15:04:05Z07:00" }}",
-      "author": {
-        "@type":"Person",
-        "name": {{ printf "%q" $author }}
-      },
-      "publisher": {
-        "@type":"Organization",
-        "name": "Class with Nico",
-        "logo": { "@type":"ImageObject", "url": "{{ (or .Site.Params.logo "/images/logo_simple.svg") | absURL }}" }
-      },
-      "inLanguage":"{{ .Site.Language.LanguageCode }}"
-    }
-    </script>
-  {{ end }}
-</head>
+{{ end }}

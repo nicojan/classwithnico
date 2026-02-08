@@ -1,22 +1,22 @@
 ---
 title: "學生的一則訊息"
-subtitle: "在語言學習中，動機比完美更重要"
 date: 2025-09-18T09:00:00-07:00
+nolastmod: true
 lastmod: 2025-09-18T12:00:00-07:00
 author: "Nico Jan"
+cover: /blog/img/shared/a-student's-message.png
+images:
+  - /blog/img/shared/a-student's-message.png
 draft: false
 tags: ["教學", "英語學習", "學習動機", "學生成長"]
 categories: ["心得分享"]
-
-# For bilingual linking
 translationKey: "a-student's-message"
-
-# For SEO / social sharing
 description: "一位七年級學生的訊息提醒我，語言學習的關鍵不是完美，而是持續的動機。這篇首發文章結合研究，也提供家長能如何支持孩子的建議。"
-images: ["/blog/img/shared/a-student's-message.png"]
 ---
 
 當我考慮開始寫這個部落格時，我不確定該如何起頭。我希望第一篇文章能反映我教學中最重視的事，而不只是一則公告或服務列表。然後上週，我收到了一位七年級學生的訊息。
+
+<!--more-->
 
 <figure>
   <img src="/blog/img/shared/a-student's-message.png" alt="七年級學生傳訊息給英文老師 Nico Jan，分享他喜歡在 Class with Nico 上英文課，儘管有拼字和文法錯誤">

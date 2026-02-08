@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls:*)",
+      "Bash(wc:*)",
+      "mcp__plugin_context7_context7__resolve-library-id",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:hugo-theme-dream.g1en.site)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(hugo version:*)",
+      "WebFetch(domain:api.github.com)",
+      "WebFetch(domain:g1en.site)",
+      "Bash(hugo mod init:*)",
+      "Bash(brew list:*)",
+      "Bash(brew install:*)",
+      "Bash(curl:*)",
+      "Bash(hugo mod get:*)",
+      "Bash(hugo:*)",
+      "Bash(pkill:*)",
+      "Bash(find:*)"
+    ]
+  }
+}

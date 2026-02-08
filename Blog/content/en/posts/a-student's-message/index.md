@@ -1,22 +1,22 @@
 ---
-title: "A Student’s Message"
-subtitle: "why motivation matters more than perfection in language learning"
+title: "A Student's Message"
 date: 2025-09-18T09:00:00-07:00
+nolastmod: true
 lastmod: 2025-09-18T12:00:00-07:00
 author: "Nico Jan"
+cover: /blog/img/shared/a-student's-message.png
+images:
+  - /blog/img/shared/a-student's-message.png
 draft: false
 tags: ["teaching", "English learning", "motivation", "student-success"]
 categories: ["Reflections"]
-
-# For bilingual linking
 translationKey: "a-student's-message"
-
-# For SEO / social sharing
-description: "A Grade 7 student’s simple message reminded me why motivation, not perfection, drives language learning. In this first blog post, I connect the story to research and share how parents can support their children."
-images: ["/blog/img/shared/a-student's-message.png"]
+description: "A Grade 7 student's simple message reminded me why motivation, not perfection, drives language learning. In this first blog post, I connect the story to research and share how parents can support their children."
 ---
 
 When I thought about starting this blog, I was unsure how to begin. I wanted the first post to reflect what matters most in my teaching, not just an announcement or a list of services. Then last week, I received a message from one of my grade 7 students.
+
+<!--more-->
 
 <figure>
   <img src="/blog/img/shared/a-student's-message.png" alt="Grade 7 student message to English teacher Nico Jan, sharing that he enjoys his English classes at Class with Nico despite spelling and grammar errors">
