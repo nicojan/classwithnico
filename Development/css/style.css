@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&display=swap");
+
 /* --- Global Styles --- */
 html,
 body {
@@ -20,6 +22,13 @@ body.blog {
 body {
   min-height: 100vh;
 }
+
+:lang(zh), :lang(zh-Hant), :lang(zh-TW), :lang(zh-HK) {
+  font-family: "Noto Serif TC", "PingFang TC", "Songti TC", serif;
+  font-kerning: normal;
+  font-variant-east-asian: proportional-width;
+}
+
 .body {
   --page-right-pad: 20vw;
   --video-left: 20vw;

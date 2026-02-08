@@ -1,3 +1,7 @@
 {{/* Override dream's nav.html to include the main site navbar + language switcher */}}
 {{ partial "navbar_include.html" . }}
-{{ partial "langswitch.html" . }}
+{{/* Only render langswitch here for section/taxonomy pages;
+     homepage and single posts embed their own copy */}}
+{{ if not (or .IsHome .IsPage) }}
+  {{ partial "langswitch.html" . }}
+{{ end }}

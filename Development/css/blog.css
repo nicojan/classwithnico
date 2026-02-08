@@ -149,6 +149,30 @@
   color: #000;
 }
 
+/* --- Homepage: lang-switch inline above the card grid, left-aligned --- */
+.flip-container > .lang-switch {
+  position: static;
+  margin: 0 0 1rem 1rem;
+  box-shadow: none;
+  background: rgba(255, 255, 255, 0.6);
+}
+
+/* --- Single post: lang-switch beside the title --- */
+.lang-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.lang-header-row .lang-switch {
+  position: static;
+  flex-shrink: 0;
+  box-shadow: none;
+  background: rgba(255, 255, 255, 0.6);
+  margin-top: 0.35em;
+}
+
 /* ===================================================================
    5. Mobile: undo style.css .container clamp (higher specificity)
    =================================================================== */
@@ -174,9 +198,29 @@
     padding-top: 65px;
   }
 
-  /* Language switcher: adjust for shorter mobile navbar */
+  /* Language switcher: fixed pill (section/taxonomy fallback) */
   .lang-switch {
     top: 60px;
     right: 1rem;
+  }
+
+  /* Homepage inline: keep static, adjust margin */
+  .flip-container > .lang-switch {
+    position: static;
+    top: auto;
+    right: auto;
+    margin: 0 0 0.75rem 0.5rem;
+  }
+
+  /* Single post header: stack vertically on small screens */
+  .lang-header-row {
+    flex-wrap: wrap;
+  }
+
+  .lang-header-row .lang-switch {
+    position: static;
+    top: auto;
+    right: auto;
+    margin-top: 0;
   }
 }
