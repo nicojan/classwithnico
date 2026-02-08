@@ -79,15 +79,33 @@
   display: revert;
 }
 
-/* style.css sets global link styles; let Dream/Tailwind handle links */
-.flip-container a {
-  color: revert;
-  text-decoration: revert;
-  transition: revert;
+/* Links: black, no decoration, all states */
+.flip-container a,
+.flip-container a:link,
+.flip-container a:visited,
+.flip-container a:hover,
+.flip-container a:active {
+  color: #000;
+  text-decoration: none;
 }
 
 /* ===================================================================
-   3. Mobile: undo style.css .container clamp (higher specificity)
+   3. Custom footer
+   =================================================================== */
+.flip-container footer {
+  justify-content: center;
+}
+.flip-container footer .footer-credit {
+  font-size: 0.85em;
+  color: #000;
+}
+.flip-container footer .footer-credit a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* ===================================================================
+   4. Mobile: undo style.css .container clamp (higher specificity)
    =================================================================== */
 @media (max-width: 1000px) {
   /* The mobile-navbar .container is fine (that IS the site navbar).
