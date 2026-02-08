@@ -18,14 +18,6 @@ When I thought about starting this blog, I was unsure how to begin. I wanted the
 
 <!--more-->
 
-<figure>
-  <img src="/blog/img/shared/a-student's-message.png" alt="Grade 7 student message to English teacher Nico Jan, sharing that he enjoys his English classes at Class with Nico despite spelling and grammar errors">
-  <figcaption>
-    A note from one of my Grade 7 students who had just moved to the United States.  
-    His words remind me that motivation and connection matter more than perfection.
-  </figcaption>
-</figure>
-
 He had just moved to the United States and was still adjusting to a new school and city. His English is around an A2 level, so spelling and grammar often pose challenges. Still, he chose to write to me in English anyway, outside of our classes.
 
 In that short note, he told me he enjoys our lessons. It was not polished. It was not perfect. But it carried weight. What mattered was the effort and the simple wish to connect.
