@@ -7,6 +7,9 @@ body {
   font-size: 18px;
   line-height: 1.4;
   font-family:
+    "Cormorant Garamond",
+    ui-serif,
+    "Georgia",
     "source-serif-4-variable",
     "Times New Roman" serif,
     "source-han-serif-tw-subset",
@@ -33,7 +36,9 @@ body.blog {
 /* Optional: keep English using a clean Latin stack explicitly when lang="en" is present */
 :lang(en),
 :lang(en-CA) {
-  font-family: ui-serif, "Georgia", "Times New Roman", "Source Serif 4", serif;
+  font-family:
+    "Cormorant Garamond", ui-serif, "Georgia", "Times New Roman",
+    "Source Serif 4", serif;
 }
 body {
   min-height: 100vh;
