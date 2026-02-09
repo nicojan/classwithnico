@@ -2534,6 +2534,46 @@
               });
           });
         });
+
+      // Mobile nav scroll-spy
+      // Activates a tab when its section is visible in the top half of the viewport
+      (function () {
+        var mobileLinks = document.querySelectorAll(".nav_mobile .nav_links");
+        if (!mobileLinks.length) return;
+
+        var sections = [];
+        mobileLinks.forEach(function (ml) {
+          var href = ml.getAttribute("href");
+          if (!href) return;
+          var sec = document.querySelector(href);
+          if (sec) sections.push({ link: ml, el: sec });
+        });
+
+        function sync() {
+          var midline = window.scrollY + window.innerHeight * 0.5;
+          var best = null;
+
+          for (var i = sections.length - 1; i >= 0; i--) {
+            var rect = sections[i].el.getBoundingClientRect();
+            var top = rect.top + window.scrollY;
+            if (top <= midline) {
+              best = sections[i];
+              break;
+            }
+          }
+
+          sections.forEach(function (s) {
+            if (s === best) {
+              s.link.classList.add("w--current");
+            } else {
+              s.link.classList.remove("w--current");
+            }
+          });
+        }
+
+        window.addEventListener("scroll", sync, { passive: true });
+        sync();
+      })();
     </script>
   </body>
 </html>
